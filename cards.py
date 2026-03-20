@@ -1,26 +1,19 @@
+"""
+## Card
+Attributes: 
+- name
+- category
+Methods: 
+- __str__?
+"""
+
+
 class Card(): 
     """
     Card
     """
-    def __init__(self):
+    def __init__(self, name, category):
+        self.name = name
+        self.category = category
 
 
-class WHO(Card): 
-    """
-    Who card
-    """
-    def __init__(self):
-
-
-class WHAT(Card): 
-    """
-    WHAT
-    """
-    def __init__(self):
-
-
-class WHERE(Card): 
-    """
-    WHERE
-    """
-    def __init__(self):
