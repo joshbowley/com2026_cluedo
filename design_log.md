@@ -300,7 +300,7 @@ Attributes:
 - name
 - category
 Methods: 
-- __sty__? 
+- __str__? 
 
 ## Player 
 Attributes:
@@ -354,7 +354,9 @@ Methods:
 - print_summary
 
 
+## Implementation note: board.py
 
+I will only create one instance of board per run, so I am setting room names, adjacency map and starting positions as class attributes. 
 
 
 
