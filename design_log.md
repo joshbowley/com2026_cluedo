@@ -77,7 +77,7 @@ If in room, and other player tokens are on exits of room, is player in room able
 
 ## Key objects/parts of the game:
 
-- Players.
+- Players -> clue sheet? 
 - WHO, WHAT, WHERE cards. 
 - Dice.
 - **(Red bonus cards).
@@ -85,13 +85,281 @@ If in room, and other player tokens are on exits of room, is player in room able
 
 ## Thoughts about inheritance/OOP considerations:
 
-Player class -> player object defined in setup
+Physical object class -> Player class and Weapon -> player object defined in setup
 
 Card class -> seperate WHO, WHAT and WHERE classes **(red bonus card class) -> specific cards
 
 Location class -> room class, corridor and center of board instances -> specific rooms
 
 Dice class
+
+## Physical object class
+
+What is common for each subclass that is going to come off this superclass? 
+
+The Player and Weapon subclasses are coming off this. 
+
+What is common: 
+- Have a name
+- Have an associated icon for movement on board.
+- Tracks current position
+
+
+### Player class - attibrutes and methods
+
+What does it need to do? 
+
+Needs to: 
+- Have a name. 
+- Have an associated icon for movement on board. 
+- Have a CLUE sheet that updates real time. 
+- When included in suggestion, when player get moved into accussed room. 
+
+
+## Card class - attributes and methods
+
+What does it need to do?
+
+What is common for each sub class that is going to come off this superclass? 
+
+Sub cards - WHO, WHAT, WHERE 
+
+What is common:
+- Be able to be shown for other players
+- Be able to be stored in the Yellow Envelope. 
+- Shuffle randomly. 
+- Have a unique icon/display text on card. 
+
+### WHO class
+What is unique about the WHO class? 
+
+# Final Scope - COM2016 Cluedo
+
+Ok I can sense a bit of over complication and mission creep. I am now looking to set final scope to avoid these issues and be able to deliver a full working program on time. 
+
+## Included Features (non-negotiable)
+
+### Core Gameplay
+
+- Command-line interface
+- Game asks for: 
+    - Number of players
+    - player names
+- Full game loop: 
+    - Turn based system
+    - Cycles through players
+- Dice roll each turn
+- Player movement on board representation
+
+### Cards and Setup
+
+- Three categories of cards: 
+    - suspects (WHO)
+    - weapons (WHAT)
+    - rooms (WHERE)
+- One random card from each category placed in a solution (murder envelope)
+- Remaining cards: 
+    - shuffled
+    - dealt evenly to players
+- Any leftover cards:
+    - placed face-up
+    - visible to all players
+
+### Player state
+Each player has: 
+- name 
+- current position
+- hand of cards
+- status (active/eliminated from accusing)
+- record of known cards (auto-updated)
+
+### Movement 
+- Dice-based movement
+- movement allowed: 
+    - up/dowm/left/right (no diagonals)
+- Valid moved determined by board structure
+- Entering a room: 
+    - does not require exact role (allowed if passing over)
+
+### Suggestions (core mechanic)
+When a player is in a room:
+- must make a suggestion
+    - 1 suspect
+    - 1 weapon
+    - current room
+- suggested suspect is moved into the room
+- suggested weapon is considered in the room
+
+Resolution:
+- players are checked in order (to the left)
+- first player with a matching card:
+    - shows exactly one card
+- if no player can answer:
+    - no card is shown
+
+### Notes/Clue sheet
+
+System automatically tracks: 
+- cards in player's hand
+- faceup leftover cards
+- cards shown during suggestions
+
+Players can: 
+- view summary using p command
+
+### Accusation
+- Player can make an accusation when allowed (in center of the room)
+- Format:
+    - suspect + weapon + room
+
+Outcome: 
+- correct -> player wins, game ends
+- incorrect -> player:
+    - cannot accuse again
+    - continues answering questions
+
+### Game end
+Game ends when one player makes a correct accusation. Winner is declared clearly. 
+
+## Simplifications (explicit and justified)
+- Red bonus cards are not implemented
+- No 2-player/team CLUE special rules
+- Board may be simplified (fewer rooms, or simplified layout)
+- No graphical interface (CLI only) 
+- Weapons are not indepentent moving entities, handled logically via suggestions
+- CLUE sheet is automatically updated (not manual)
+
+## Technical Requirements (must include)
+- Multiple classes (OOP structure)
+- main.py to start the game 
+- clear game loop
+- error handling
+    - invalid input
+    - invalid moves
+- pytest unit tests for core logic
+- sphinx documentation
+- github repo with regular commits
+- report + UML + Video
+
+# Data Model
+
+The data each object needs to store
+
+## Player
+
+- name
+- token/suspect name
+- current position
+- hand of cards
+- eliminated flag
+- notes or clue sheet data 
+- flag for "was moved into a room by another player last turn"
+
+## Card
+- name 
+- category: suspect/ weapon/ room
+
+## Board 
+- rooms 
+- corridors/spaces
+- adjaceny rules
+- starting positons
+- center acculastion area
+
+## Game 
+- players
+- current player index
+- deck/all cards
+- solution cards
+- face-up leftover cards
+- game-over state
+
+# Turn algorithm 
+
+1. Check if player is elimated from accusing, but still allowed to answer suggestions
+    - If eliminated, then advance turn. 
+    - If not eliminated, continue.  
+2. Check if player has been moved into another room by other player's suggestion since their last turn. 
+    - If has been moved, allow them to choose to either: stay and suggest, or roll and move. 
+        - If stay and suggest, resolve suggestion by checking players in order to the left. Then advance turn. 
+        - If roll and move, continue.
+    - If haven't been moved, continue.
+3. Roll dice. 
+4. Show valid moves. 
+5. Move player. 
+    - If in room, allow suggestion. Resolve suggestion by checking players in order to the left. Then advance turn. 
+    - If in corridor, advance turn. 
+    - If in center of board, optionally accuse.
+        - If accusation correct, end game and player wins. 
+        - If accusation incorrect, mark player as eliminated. Advance turn. 
+
+# Class design
+
+## Card
+Attributes: 
+- name
+- category
+Methods: 
+- __sty__? 
+
+## Player 
+Attributes:
+- names 
+- character
+- position
+- hand 
+- notes
+- is_active
+- can_suggest_without_moving
+Methods:
+- move
+- show_matching_card
+- record_seen_card
+- make_suggestion
+- make_accusation
+
+## Dice
+Methods: 
+- roll
+
+Could even just be a function. 
+
+## Board 
+Attributes: 
+- room definitions 
+- adjaceny/valid movement structure
+- starting positions
+Methods: 
+- get_valid_moves
+- move_player
+- is_room
+- get_room_name
+
+## Game 
+Attributes: 
+- players
+- board
+- cards
+- solution
+- face_up_cards
+- current_turn
+- winner
+Methods: 
+- setup
+- deal_cards
+- run
+- play_turn
+- handle_suggestion
+- handle_accusation
+- print_summary
+
+
+
+
+
+
+
+
 
 
 
