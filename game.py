@@ -1,55 +1,53 @@
 """
-Thoughts about inheritance/OOP considerations:
+## Game 
+Attributes: 
+- players
+- board
+- cards
+- solution
+- face_up_cards
+- current_turn
+- winner
+Methods: 
+- setup
+- deal_cards
+- run
+- play_turn
+- handle_suggestion
+- handle_accusation
+- print_summary
 
-Player class -> player object defined in setup
+"""       
+        
+class Game():
+    def __init__(self, players, board, cards, 
+                 solution, face_up_cards, 
+                 current_turn, winner):
+        self.players = players
+        self.board = board
+        self.cards = cards
+        self.solution = solution
+        self.face_up_cards = face_up_cards
+        self.current_turn = current_turn
+        self.winner = winner
 
-Card class -> seperate WHO, WHAT and WHERE classes **(red bonus card class) -> specific cards
+    def setup():
+        # Initial game setup. 
 
-Location class -> room class, corridor and center of board instances -> specific rooms
+    def deal_cards():
+        # Deal out cards at start of game
 
-Dice class
-
-"""
-
-class Player(): 
-    """
-    Player
-    """
-    def __init__(self):
-
-
-
-
-class Location(): 
-    """
-    Location
-    """
-    def __init__(self):
-
-class Room(Location):
-    """
-    Room
-    """
-    def __init__(self):
-        super().__init__()
-
-class Corridor(Location):
-    """
-    Room
-    """
-    def __init__(self):
-        super().__init__()
-
-class CenterOfBoard(Location):
-    """
-    Center of Board
-    """
-    def __init__(self):
-        super().__init__()
-
-class Dice():
-    """
-    Dice
-    """
-    def __init__(self):
-        pass
+    def run():
+        # Run
+    
+    def play_turn()
+        # play turn
+    
+    def handle_suggestion():
+        # suggestion logic
+    
+    def handle_accusation():
+        # accusation logic
+    
+    def print_summary():
+        # print summary with 'p' key input
