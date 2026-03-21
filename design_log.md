@@ -411,7 +411,7 @@ Like in python-chess [5], this would be a dictionary where each key is a positio
 
 For reference, I am using the Waddingtons 1990 board [6].
 
-![Cluedo Board Diagram]("C:\Users\joshb\OneDrive\PHYSICS BSc UNIVERSITY of EXETER\BSc Physics Stage 2\Programming in Python\com2026_cluedo\Cluedo_Board_Diagram.png")
+![Cluedo Board Diagram](Cluedo_Board_Diagram.png)
 
 *Figure 1: Cluedo Board Layout. Adapted from 1990 Waddingtons Cluedo Board [6]*
 
