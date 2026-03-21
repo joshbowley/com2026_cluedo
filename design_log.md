@@ -359,8 +359,45 @@ Methods:
 I will only create one instance of board per run, so I am setting room names, adjacency map and starting positions as class attributes. 
 
 
+### 21.03.2026
 
+## Board.py: [4] [5]
 
+I have decided that I am going to put get_valid_moves into Board class. I now need to come up with a program that is able to check the valid moves. My first thought is that this is similar to the requirements of a chess engine, where it would have to check the valid moves for different pieces with different move types. Therefore, I am reading some existing chess python engines and looking for their methods of move checking valid squares to see if I can adapt this for my program. 
+
+First is python-chess [4] [5].
+
+### python-chess [4] [5] 
+
+What python-chess is: 
+- a chess rules engine and board representation library, not a playable game. Completely separated the board model from an UI or player interaction. This separation is the central design decision. 
+
+Layered architechture: 
+- the code is organised in layers. primitive types and constants at the bottom, then data structures, then a base board class (piece plaement only), then a full board class (adds game rules on top). Each layer only depends on what's below it. Applied to Cluedo: separate Board (physical layout, adjacency) from Game (turn logic, rules, state). 
+
+Bitboards (concept not implementation): 
+- chess represents board state as 64-bit integers for performance, The principle worth taking is that the game state should be stored in efficient, well-chosen data structure rather than strings or other verbose objects. For Cluedo, maybe a 2D list or adjacecy dictionary is a good equivalent. 
+
+Seperation of geometry from legality
+- generate_pseudo_legal_moves produces what is geometrically possible. generate_legal_moves filters that by actual game rules. Directly applicable to cluedo: split it so board knows what squares are connected and game applies the dice roll constraint on top. Keeping these two concerns seperate will make it cleaner. 
+
+Type aliases as documentation: 
+- Color = bool, Square = int. These don't affect runtime but make every function self documenting. Will do the same with RoomName = str etc. 
+
+Dataclasses for game entities:
+- Piece and Move sue @dataclasses.dataclass to eliminate boilerplate __ init__, __ repr__, __ eq__. Clean pattern for small value objects like cards and suggestions. 
+
+Private vs Public method: 
+- Underscore prefix consistently marks internal methods. Public methods are the stable interface. Applying this throughout: anything that is implementation detail should get underscored. 
+
+Properties for derived state: 
+- legal_moves is an @property that recomputes fresh on every access rather than storing a potentially stale list. Useful anywhere in Cludo where something needs to reflect current state, like valid moves or active players. 
+
+Outcome/ermination enum pattern:
+- Game endings are represented as an enum of reasons plus a dataclass bundling that with the winner. Clean model for Cluedo's end conditions, such as correct accusation, incorrect accusation eliminating last player, etc. 
+
+What I don't think I'll copy: 
+- Board class is huge. Handles move generation, parsing, castling, en passant, repetition detection all in one class. Game in cluedo should not become the smae kind of god class. Also, assert is used for validation. im thinking raise ValueError would be better. 
 
 
 
@@ -373,3 +410,7 @@ I will only create one instance of board per run, so I am setting room names, ad
 [2] CLUE The Classic Mystery Game: [hasbro.com/common/documents/dad2885d1c](https://www.hasbro.com/common/documents/dad2885d1c4311ddbd0b0800200c9a66/2BFAEC9E5056900B102C3859E9AC6332.pdf) (Accessed 19.03.2026)
 
 [3] How to Play Cluedo: [asmodee.co.uk/blogs/news/cluedo-rules](https://www.asmodee.co.uk/blogs/news/cluedo-rules) (Accessed 19.03.2026)
+
+[4] python-chess.readthedocs.io: [python-chess.readthedocs.io/en/latest](https://python-chess.readthedocs.io/en/latest/) (Accessed 21.03.2026)
+
+[5] python-chess source code: [source code](https://python-chess.readthedocs.io/en/latest/_modules/chess.html#parse_square) (Accessed 21.03.2026)
