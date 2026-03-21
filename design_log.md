@@ -399,7 +399,23 @@ Outcome/ermination enum pattern:
 What I don't think I'll copy: 
 - Board class is huge. Handles move generation, parsing, castling, en passant, repetition detection all in one class. Game in cluedo should not become the smae kind of god class. Also, assert is used for validation. im thinking raise ValueError would be better. 
 
+## Position representation
 
+I have two types of location: corridor squares and rooms. The key design question is do they live in the same coordinate system or seperate ones. 
+
+I'm thinking __seperate__ ones, where corridor squares are (row, col) tuples, and rooms are identified by a string game "Kitchen". A player's position is either a tuple or a string. This maps to Cluedo's rules where being "in a room" is a distinct state from being on a corridor tile. [2]
+
+## The adjacency map
+
+Like in python-chess [5], this would be a dictionary where each key is a position and each value is a list of positions reachable in one step. I'm going to draw the board out on my iPad first and label the rooms, number the corridor squares, name the rooms, make the doorways. Then the 'adjacency map' is just this sketch encoded as a dictionary. 
+
+For reference, I am using the Waddingtons 1990 board [6].
+
+![Cluedo Board Diagram]("C:\Users\joshb\OneDrive\PHYSICS BSc UNIVERSITY of EXETER\BSc Physics Stage 2\Programming in Python\com2026_cluedo\Cluedo Board Diagram.png")
+
+*Figure 1: Cluedo Board Layout. Adapted from 1990 Waddingtons Cluedo Board [6]*
+
+The next step is to encode the adjacency map as a dictionary. I will do that next session.
 
 
 
@@ -414,3 +430,5 @@ What I don't think I'll copy:
 [4] python-chess.readthedocs.io: [python-chess.readthedocs.io/en/latest](https://python-chess.readthedocs.io/en/latest/) (Accessed 21.03.2026)
 
 [5] python-chess source code: [source code](https://python-chess.readthedocs.io/en/latest/_modules/chess.html#parse_square) (Accessed 21.03.2026)
+
+[6] Waddingtons Cluedo and how ‘The Great Detective Game’ was made in Leeds. [blog](https://museumsandgalleries.leeds.gov.uk/blog-waddingtons-cluedo-and-how-the-great-detective-game-was-made-in-leeds-m83x) (Accessed 21.03.2026)
