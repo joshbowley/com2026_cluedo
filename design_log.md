@@ -417,6 +417,8 @@ For reference, I am using the Waddingtons 1990 board [6].
 
 The next step is to encode the adjacency map as a dictionary. I will do that next session.
 
+### 22.03.2026
+
 
 
 # Bibliography
