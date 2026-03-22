@@ -419,7 +419,17 @@ The next step is to encode the adjacency map as a dictionary. I will do that nex
 
 ### 22.03.2026
 
+Errors in board._ADJACENCY_MAP found by check_reciprocity() function in test.py: 
 
+Central Room -> (18, 14) exists but (18, 14) -> Central Room does not
+Central Room -> (18, 15) exists but (18, 15) -> Central Room does not
+(7, 20) -> (7, 21) exists but (7, 21) -> (7, 20) does not
+(7, 21) -> (7, 19) exists but (7, 19) -> (7, 21) does not
+
+I'm fixing this now. 
+
+Ok fixed those issues and check_reciprocity() outputs: 
+All connections reciprocal
 
 # Bibliography
 
