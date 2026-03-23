@@ -1,20 +1,18 @@
-"""
-## Board 
-Attributes: 
-- room definitions 
-- adjaceny/valid movement structure
-- starting positions
-Methods: 
-- get_valid_moves
-- move_player
-- is_room
-- get_room_name
-"""
+"""Board Class definition for Cluedo game."""
 
 _ROOM_NAMES = ("Kitchen", "Ballroom", "Conservatory", 
                   "Dining Room", "Lounge", "Hall", 
                   "Library", "Billiard Room", "Study",
                   "Central Room")
+
+_STARTING_POSITIONS = {
+    "Mrs White": (1,10),   
+    "Rev Green": (1,15),
+    "Mrs Peacock": (7,24),
+    "Prof Plum": (20,24),
+    "Miss Scarlett": (25,8),
+    "Col Mustard": (18,1)
+    }   
 
 _ADJACENCY_MAP = {
         # Rooms:
@@ -35,8 +33,8 @@ _ADJACENCY_MAP = {
                          (11,10), (12,10), (13,10), (14,10), (15,10), (16,10), (17,10)],# left column
         
         # Corridor Spaces:
-        (1,10): [(2,10)], # starting square
-        (1,15): [(2,15)], # starting square
+        (1,10): [(2,10)], # starting square for Mrs White
+        (1,15): [(2,15)], # starting square for Rev Green
 
         (2,8): [(2,9), (3,8)], 
         (2,9): [(2,8), (2,10)], 
@@ -75,7 +73,7 @@ _ADJACENCY_MAP = {
         (7,21): [(7,20), (7,22), (8,21)], 
         (7,22): [(7,21), (7,23), (8,22)],
         (7,23): [(7,22), (7,24), (8,23)], 
-        (7,24): [(7,23)], # starting square
+        (7,24): [(7,23)], # starting square for Mrs Peacock
 
         (8,1): [(8,2)], 
         (8,2): [(8,1), (8,3), (9,2)],
@@ -178,7 +176,7 @@ _ADJACENCY_MAP = {
         (17,16): [(16,16), (17,17), (18,16), "Central Room"], # doorway to Central Room
         (17,17): [(16,17), (17,16), (18,17), "Library"],      # doorway to Library
         
-        (18,1): [(18,2)], # starting square
+        (18,1): [(18,2)], # starting square for Col Mustard
         (18,2): [(17,2), (18,1), (18,3), (19,2)], 
         (18,3): [(17,3), (18,2), (18,4), (19,3)], 
         (18,4): [(17,4), (18,3), (18,5), (19,4)],
@@ -218,7 +216,7 @@ _ADJACENCY_MAP = {
         (20,21): [(20,20), (20,22), (21,21)], 
         (20,22): [(20,21), (20,23), (21,22)], 
         (20,23): [(20,22), (20,24), (21,23)],
-        (20,24): [(20,23)], # starting square
+        (20,24): [(20,23)], # starting square for Prof Plum
 
         (21,8): [(20,8), (21,9), (22,8)], 
         (21,9): [(20,9), (21,8), (22,9)], 
@@ -246,29 +244,34 @@ _ADJACENCY_MAP = {
         (24,16): [(23,16), (24,17)], 
         (24,17): [(23,17), (24,16), (25,17)], 
 
-        (25,8): [(24,8)], # starting square
+        (25,8): [(24,8)], # starting square for Miss Scarlett
         (25,17): [(24,17)]
 
     }
 
-class Board():
+class Board:
+    """Board with Adjacency Map and Room Names for Cluedo game.
+
+    Attributes:
+        - room_names: Tuple of room names in the game.
+        - adjacency_map: Dictionary mapping each position (room name or corridor coordinate) to a 
+        list of adjacent positions.
+        - starting_positions: Dictionary mapping each character to their starting position on the board.
+    
+    """
+
     # Class attributes
     room_names = _ROOM_NAMES
 
     adjacency_map = _ADJACENCY_MAP
-    
-    # Starting positions
-    def __init__(self):
-        pass
-    
-    def get_valid_moves():
-        pass
-        # find valid moves for given position
 
-    def is_room():
+    starting_positions = _STARTING_POSITIONS
+    
+    def get_valid_moves(self, position: tuple | str, steps: int, blocked: list[tuple]) -> list[tuple | str]:
+        """Find all valid moves from a given position with a given number of steps, 
+        considering blocked positions."""
         pass
-        # is room
 
-    def get_room_name():
+    def is_room(self, position: tuple | str) -> bool:
+        """Check if a given position is a room."""
         pass
-        # get room name for given position
