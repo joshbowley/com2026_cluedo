@@ -1,5 +1,7 @@
 """Board Class definition for Cluedo game."""
 
+from collections import deque
+
 _ROOM_NAMES = ("Kitchen", "Ballroom", "Conservatory", 
                   "Dining Room", "Lounge", "Hall", 
                   "Library", "Billiard Room", "Study",
@@ -342,9 +344,47 @@ class Board:
     adjacency_map = _ADJACENCY_MAP
     
     def get_valid_moves(self, position: tuple | str, steps: int, blocked: list[tuple]) -> list[tuple | str]:
-        """Find all valid moves from a given position with a given number of steps, 
-        considering blocked positions."""
-        pass
+        """Find all valid positions reachable from a given position within a given number of steps.
+
+    Uses Breadth-First Search to explore the adjacency map layer by layer.
+    Rooms are valid destinations but cannot be passed through.
+    Blocked positions (occupied by other players) are excluded.
+
+    Args:
+        position: The starting position, either a corridor coordinate tuple or room name string.
+        steps: The number of steps available to move, determined by the dice roll.
+        blocked: List of corridor coordinates currently occupied by other players.
+
+    Returns:
+        List of reachable positions, each either a corridor coordinate tuple or room name string.
+    """
+        
+        visited = set()
+        visited.add(position)
+        queue = deque([(position, 0)])
+        valid_moves = []
+
+        # While there is anything left in the queue, keep processing
+        while queue:
+            current_position, steps_taken = queue.popleft()
+
+            for neighbour in self.adjacency_map[current_position]:
+                if neighbour in blocked:
+                    continue
+                elif neighbour in visited: 
+                    continue
+                elif isinstance(neighbour,str): # neighbour is a room
+                    valid_moves.append(neighbour) # add to valid moves but do not add to queue (can't move through rooms)
+                    visited.add(neighbour) # mark room as visited to prevent adding it to valid moves multiple times if there are multiple doorways leading to the same room
+                    continue
+                else: # neighbour is a corridor space
+                    if steps_taken + 1 < steps:
+                        queue.append((neighbour, steps_taken + 1)) # add to queue for further processing if we have steps remaining
+                        visited.add(neighbour)
+                    elif steps_taken + 1 == steps:
+                        valid_moves.append(neighbour) # add to valid moves but do not add to queue (no more steps remaining)
+
+        return valid_moves
 
     def is_room(self, position: tuple | str) -> bool:
         """Check if a given position is a room."""

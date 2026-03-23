@@ -506,14 +506,42 @@ There are two options for printing coloured text to terminal:
 
 I'm going to use the __colorama__ library [10], as the API is cleaner than raw escape codes, and it allows for background colours, which is especially useful for the Cluedo board. The dependencies for this will be written in the requirements.txt file. 
 
-## Implementing get_valid_moves() using BFS (Breadth first search) [11]
+## Implementing get_valid_moves() using BFS (Breadth first search) [11]  [12] [13] [14]
 
 Doing some research, there are a few different options for implementing get_valid_moves():
 
-1. __Breadth First Search (BFS)__: Explores positions layer by layer. All reachable in 1 step, in 2 steps, so on. This maps well to "find everything in N steps" as layer structure corresponds to step count. So can stop when exhausted all layers up to the dice roll. 
+1. __Breadth First Search (BFS)__ [11]: Explores positions layer by layer. All reachable in 1 step, in 2 steps, so on. This maps well to "find everything in N steps" as layer structure corresponds to step count. So can stop when exhausted all layers up to the dice roll. 
 
-2. __Depth First Search (DFS)__: 
+2. __Depth First Search (DFS)__ [12]: Explores on path as deep as possible before backtracking. Would need to track remaining steps on each recursive call. Works correctly but is doing more work than necessary for this problem. 
 
+3. __Dijkstra's Algorithm__ [13]: finds shortest path for all destinations, weighted by edge cost. This is overkill as all edges have equal cost: 1 step. This means that Dijkstra's reduces to BFS in practice. So adds complexity for no benefit. 
+
+4. __Simple Recursive Flood Fill__ [14]: Call get_neighbours, subtract one from steps, recurse. Simpler to reason about than BFS but has the same backtracking inefficiency as DFS and the recursion depth concern.
+
+I think BFS is the correct choice. The key thing about BFS is that it finds all reachable positions within exacty N steps without revisitiong positions. This fits because: 
+
+- I want all valid destinations, not just one. 
+- movement cost is uniform: every step costs one move
+- step budget: not the shortest path, but reachability within N steps. 
+- rooms are terminal: need to stop expanding from a room once reached. BFS can do this by not adding rooms to frontier. 
+
+Note: in cluedo, can also end turn  on any corridor square that you pass through, not just furthest ones. Therefore valid moves are all steps reachable within the 1 to N steps. So should collect every step visited. 
+
+### BFS for get_valid_rooms method [11] [15]
+
+##### BFS Psudocode [15] [16]: 
+
+- create a queue Q 
+
+- mark v as visited and put v into Q 
+
+- while Q is non-empty 
+
+    - remove the head u of Q 
+
+    - mark and enqueue all (unvisited) neighbors of u
+
+Using a double ended queue [16] so I can popleft(). 
 
 
 # Bibliography
@@ -540,4 +568,12 @@ Doing some research, there are a few different options for implementing get_vali
 
 [11] Breadth-First Search in Python: A Guide with Examples: [datacamp blog](https://www.datacamp.com/tutorial/breadth-first-search-in-python) (Accessed 23.03.2026)
 
-[12] (https://www.codecademy.com/article/depth-first-search-dfs-algorithm) (Accessed 23.03.2026)
+[12] Depth-First Search (DFS) Algorithm Explained: [codeacademy blog](https://www.codecademy.com/article/depth-first-search-dfs-algorithm) (Accessed 23.03.2026)
+
+[13] Dijkstra's Algorithm: [GeeksForGeeks blog](https://www.geeksforgeeks.org/dsa/dijkstras-shortest-path-algorithm-greedy-algo-7/) (Accessed 23.03.2026)
+
+[14] Recursion Explained with the Flood Fill Algorithm (and Zombies and Cats): [INVENT WITH PYTHON BLOG](https://inventwithpython.com/blog/recursion-explained-with-the-flood-fill-algorithm-and-zombies-and-cats.html) (Accessed 23.03.2026)
+
+[15] Breadth First Search in Python (with Code) | BFS Algorithm: [favtutor blog](https://favtutor.com/blogs/breadth-first-search-python) (Accessed 23.03.2026)
+
+[16] collections — Container datatypes: [python collections documentation](https://docs.python.org/3/library/collections.html) (Accessed 23.03.2026)
