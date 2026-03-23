@@ -455,6 +455,18 @@ This would be a bad choice for:
 - Game: complex setup, orchestrates everything, 
 - Board: owns class-level constants and non-trivial methods.
 
+## ASCII grid theory and implementation [8]
+
+I've been thinking of how I want to show the state of the board and tokens etc. I think there are 2 options: 
+- ASCII grid, 24 by 25 squares using the cartesian coordinate system to create unique "addresses for each item in the grid. [8] 
+- printing a text summary (e.g. Green is at (3,8), Scarlett is at (16,23), etc.).
+
+I think that the printing a text summary would look a bit crap to be honest. I know that it would still get me marks, but I've already sunk a lot of time into this project and I want to make something worthwhile. 
+
+I am also aware that the ASCII grid would be harder to implement. I am ok with this as it gives me more of an opportunity to learn. 
+
+
+
 
 # Bibliography
 
@@ -471,3 +483,5 @@ This would be a bad choice for:
 [6] Waddingtons Cluedo and how ‘The Great Detective Game’ was made in Leeds. [blog](https://museumsandgalleries.leeds.gov.uk/blog-waddingtons-cluedo-and-how-the-great-detective-game-was-made-in-leeds-m83x) (Accessed 21.03.2026)
 
 [7] @dataclasses.dataclass [Python Documentation](https://docs.python.org/3/library/dataclasses.html) (Accessed 23.03.2026)
+
+[8] How to Represent a 2D Grid in Python Code: [INVENT WITH PYTHON BLOG](https://inventwithpython.com/blog/represent-a-2d-grid-in-python.html) (Accessed 23.03.2026)
