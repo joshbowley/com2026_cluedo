@@ -385,7 +385,7 @@ Type aliases as documentation:
 - Color = bool, Square = int. These don't affect runtime but make every function self documenting. Will do the same with RoomName = str etc. 
 
 Dataclasses for game entities:
-- Piece and Move sue @dataclasses.dataclass to eliminate boilerplate __ init__, __ repr__, __ eq__. Clean pattern for small value objects like cards and suggestions. 
+- Piece and Move use @dataclasses.dataclass to eliminate boilerplate __ init__, __ repr__, __ eq__. Clean pattern for small value objects like cards and suggestions. 
 
 Private vs Public method: 
 - Underscore prefix consistently marks internal methods. Public methods are the stable interface. Applying this throughout: anything that is implementation detail should get underscored. 
@@ -429,7 +429,32 @@ Central Room -> (18, 15) exists but (18, 15) -> Central Room does not
 I'm fixing this now. 
 
 Ok fixed those issues and check_reciprocity() outputs: 
-All connections reciprocal
+All connections reciprocal. 
+
+### 23.03.2026
+
+Ok now that I have created adjacency map, I am going to be addressing some other issues/areas of my code. 
+
+1. Looking at the use of @dataclasses.dataclass decorator that is used to add generated special methods to classes. [7]  I am looking at this because this is used in python-chess source code [4] when creating the classes: 
+    - class __Outcome__:
+    - class __Piece__:
+    - class __Move__:
+These classes are all 'value objects', small containers that hold data describing a single concept, with no complex behavior of their own: 
+    - class __Outcome__: holds a termination reason and a winner. 
+    - class __Piece__: holds a piece colour and type.
+    - class __Move__: holds a from-square, to-square and optional promotion. 
+None of them have meaningful internal state that changes over time. None of them change other objects. They exist to be passed about, compared and inspected. Their __ init__ would just be boilerplate. 
+
+Good candidates for this in my project are: 
+- Card: name and category no behavior
+- Suggestion (if i make one): suspect, weapon, room. 
+- GameResult (or equivalent for end condition): who won and why. 
+
+This would be a bad choice for: 
+- Player: meaningful state changes
+- Game: complex setup, orchestrates everything, 
+- Board: owns class-level constants and non-trivial methods.
+
 
 # Bibliography
 
@@ -444,3 +469,5 @@ All connections reciprocal
 [5] python-chess source code: [source code](https://python-chess.readthedocs.io/en/latest/_modules/chess.html#parse_square) (Accessed 21.03.2026)
 
 [6] Waddingtons Cluedo and how ‘The Great Detective Game’ was made in Leeds. [blog](https://museumsandgalleries.leeds.gov.uk/blog-waddingtons-cluedo-and-how-the-great-detective-game-was-made-in-leeds-m83x) (Accessed 21.03.2026)
+
+[7] @dataclasses.dataclass [Python Documentation](https://docs.python.org/3/library/dataclasses.html) (Accessed 23.03.2026)
