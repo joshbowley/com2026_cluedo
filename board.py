@@ -32,7 +32,7 @@ _ROOM_CELLS = {
                  (4,9), (4,10),(4,11), (4,12), (4,13), (4,14), (4,15), (4,16),
                  (5,9), (5,10),(5,11), (5,12), (5,13), (5,14), (5,15), (5,16),
                  (6,9), (6,10),(6,11), (6,12), (6,13), (6,14), (6,15), (6,16),
-                 (7,9), (7,10),(7,11), (7,12), (7,13), (7,14), (7,15), (7,16)
+                 (7,9), (7,10),(7,11), (7,12), (7,13), (7,14), (7,15), (7,16),
                  (8,9), (8,10),(8,11), (8,12), (8,13), (8,14), (8,15), (8,16),],
 
     "Conservatory": [(1,19), (1,20), (1,21), (1,22), (1,23), (1,24),
@@ -378,12 +378,10 @@ class Board:
                     visited.add(neighbour) # mark room as visited to prevent adding it to valid moves multiple times if there are multiple doorways leading to the same room
                     continue
                 else: # neighbour is a corridor space
-                    if steps_taken + 1 < steps:
-                        queue.append((neighbour, steps_taken + 1)) # add to queue for further processing if we have steps remaining
-                        visited.add(neighbour)
-                    elif steps_taken + 1 == steps:
-                        valid_moves.append(neighbour) # add to valid moves but do not add to queue (no more steps remaining)
-
+                    valid_moves.append(neighbour) # always valid destination
+                    visited.add(neighbour)
+                    if steps_taken + 1 < steps: 
+                        queue.append((neighbour, steps_taken + 1))
         return valid_moves
 
     def is_room(self, position: tuple | str) -> bool:
