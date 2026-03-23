@@ -323,18 +323,23 @@ class Board:
 
     Attributes:
         - room_names: Tuple of room names in the game.
+        - starting_positions: Dictionary mapping each character to their starting position on the board.
+        - room_cells: Dictionary mapping each room name to a list of coordinates representing the cells that 
+        belong to that room.
         - adjacency_map: Dictionary mapping each position (room name or corridor coordinate) to a 
         list of adjacent positions.
-        - starting_positions: Dictionary mapping each character to their starting position on the board.
+        
     
     """
 
     # Class attributes
     room_names = _ROOM_NAMES
 
-    adjacency_map = _ADJACENCY_MAP
+    room_cells = _ROOM_CELLS
 
     starting_positions = _STARTING_POSITIONS
+
+    adjacency_map = _ADJACENCY_MAP
     
     def get_valid_moves(self, position: tuple | str, steps: int, blocked: list[tuple]) -> list[tuple | str]:
         """Find all valid moves from a given position with a given number of steps, 
