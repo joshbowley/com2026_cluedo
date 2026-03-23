@@ -348,4 +348,4 @@ class Board:
 
     def is_room(self, position: tuple | str) -> bool:
         """Check if a given position is a room."""
-        pass
+        return position in self.room_names

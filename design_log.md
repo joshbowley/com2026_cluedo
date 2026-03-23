@@ -506,7 +506,13 @@ There are two options for printing coloured text to terminal:
 
 I'm going to use the __colorama__ library [10], as the API is cleaner than raw escape codes, and it allows for background colours, which is especially useful for the Cluedo board. The dependencies for this will be written in the requirements.txt file. 
 
+## Implementing get_valid_moves() using BFS (Breadth first search) [11]
 
+Doing some research, there are a few different options for implementing get_valid_moves():
+
+1. __Breadth First Search (BFS)__: Explores positions layer by layer. All reachable in 1 step, in 2 steps, so on. This maps well to "find everything in N steps" as layer structure corresponds to step count. So can stop when exhausted all layers up to the dice roll. 
+
+2. __Depth First Search (DFS)__: 
 
 
 
@@ -531,3 +537,7 @@ I'm going to use the __colorama__ library [10], as the API is cleaner than raw e
 [9] Print colored text to terminal with Python: [SENTRY ANSWERS BLOG](sentry.io/answers/print-colored-text-to-terminal-with-python) (Accessed 23.03.2026)
 
 [10] Print Colors in Python terminal: [GeeksForGeeks blog](geeksforgeeks.org/python/print-colors-python-terminal) (Accessed 23.03.2026)
+
+[11] Breadth-First Search in Python: A Guide with Examples: [datacamp blog](https://www.datacamp.com/tutorial/breadth-first-search-in-python) (Accessed 23.03.2026)
+
+[12] (https://www.codecademy.com/article/depth-first-search-dfs-algorithm) (Accessed 23.03.2026)
