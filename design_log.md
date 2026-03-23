@@ -393,7 +393,7 @@ Private vs Public method:
 Properties for derived state: 
 - legal_moves is an @property that recomputes fresh on every access rather than storing a potentially stale list. Useful anywhere in Cludo where something needs to reflect current state, like valid moves or active players. 
 
-Outcome/ermination enum pattern:
+Outcome/termination enum pattern:
 - Game endings are represented as an enum of reasons plus a dataclass bundling that with the winner. Clean model for Cluedo's end conditions, such as correct accusation, incorrect accusation eliminating last player, etc. 
 
 What I don't think I'll copy: 

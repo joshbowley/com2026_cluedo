@@ -1,6 +1,7 @@
 """Card Class definition for Cluedo game."""
 
-import dataclasses import dataclass
+from dataclasses import dataclass
+
 
 @dataclass
 class Card: 
