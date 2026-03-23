@@ -1,29 +1,19 @@
-"""
-## Game 
-Attributes: 
-- players
-- board
-- cards
-- solution
-- face_up_cards
-- current_turn
-- winner
-Methods: 
-- setup
-- deal_cards
-- run
-- play_turn
-- handle_suggestion
-- handle_accusation
-- print_summary
-
-"""       
+"""Game Class for Cluedo game logic and flow control."""       
         
 class Game():
+    """Game with setup, turn management, suggestion and accusation handling, 
+    and end condition checking for Cluedo game.
+
+    Attributes:
+        - 
+    
+    
+    """
+
     def __init__(self):
         pass
 
-    def setup():
+    def setup(self):
         # Initial game setup. 
 
         # ask for number of players, 
@@ -38,7 +28,7 @@ class Game():
 
         pass
 
-    def deal_cards():
+    def deal_cards(self):
         # three categories of cards: suspects, weapons, rooms.
         # solution is one card from each category.
         # remaining cards are dealt to players.
@@ -47,12 +37,12 @@ class Game():
         pass
 
 
-    def run():
+    def run(self):
         # start first player's turn, then move to next player in turn order until end condition met
 
         pass
     
-    def play_turn():
+    def play_turn(self):
         # check if player is eliminated
         ## if eliminated, skip turn and move to next player
         ## if not eliminated, continue
@@ -77,17 +67,17 @@ class Game():
 
         pass
     
-    def handle_suggestion():
+    def handle_suggestion(self):
         # suggestion logic
 
         pass
     
-    def handle_accusation():
+    def handle_accusation(self):
         # accusation logic
 
         pass
     
-    def print_summary():
+    def print_summary(self):
         # print summary with 'p' key input
 
         pass
