@@ -1,40 +1,50 @@
-"""
-## Player 
-Attributes:
-- names 
-- character
-- position
-- hand 
-- notes
-- is_active
-- can_suggest_without_moving
-Methods:
-- move
-- show_matching_card
-- record_seen_card
-- make_suggestion
-- make_accusation
-"""
+"""Player Class definition for Cluedo game."""
 
-class Player():
-    def __init__(self, 
-                 name, character, position, hand, notes, 
-                 is_active, can_suggest_without_moving):
+class Player:
+    """Player with name, character, position, hand of cards, notesheet, and active status.
+    
+    Attributes:
+        name: The player's entered name.
+        character: The Cluedo suspect/token they're playing as.
+        position: Current position on the board, either a room name or corridor coordinate.
+        hand: Cards dealt to the player.
+        notes: The player's CLUE sheet tracking seen cards.
+        is_active: Whether the player is still active after a false accusation.
+        can_suggest_without_moving: True if moved into a room by another player's suggestion.
+    """
+    def __init__(self, name: str, character: str):
         
-        self.name = name # player's entered name
-        self.character = character # the Cluedo suspect/token they're playing as
-        self.position = position # wherer they are now
-        self.hand = hand # cards dealt to them
-        self.notes=  notes # their CLUE sheet
-        self.is_active = is_active # whether they are still in the game after a false accusation
-        self.can_suggest_without_moving = can_suggest_without_moving # when another player moves token into a room
+        self.name: str = name 
+
+        self.character: str = character 
+
+        self.position: tuple | str | None = None 
+
+        self.hand: list = [] 
+
+        self.notes: dict = {} 
+
+        self.is_active: bool = True 
+
+        self.can_suggest_without_moving: bool = False         
         
 
-    def record_seen_card(self):
-        # Add seen card to list. 
+    def record_seen_card(self, card: str, shown_by: str) -> None:
+        """Record a card that has been shown to the player, and who showed it."""
+
+        pass
+
+        
     
-    def show_matching_card(self):
-        # Show matching card for suggestions
+    def show_matching_card(self, cards: list) -> None:
+        """Show a card from the player's hand that matches one of the suggested cards, if any."""
+
+        pass
+
+        
     
-    def move_to(new_position)
-        # Update position parameter.
+    def move_to(self, new_position: tuple | str | None) -> None:
+        """Move player token to new position."""
+
+        self.position = new_position
+
