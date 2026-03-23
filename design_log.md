@@ -465,6 +465,18 @@ I think that the printing a text summary would look a bit crap to be honest. I k
 
 I am also aware that the ASCII grid would be harder to implement. I am ok with this as it gives me more of an opportunity to learn. 
 
+### Dict vs 2D list: [8]
+
+Reading tthe INVENT WITH PYTHON blog, Al Sweigart talks about the performance trade offs of 2D lists, where coordinates (x,) are stored at grid[x][y], and a dictionary, where the data is trored at grid[(x,y)]. 
+
+"The 2D list approach was the fastest and the dictionary approach was the slowest and used 10x as much memory as the 1D and 2D lists. But the dictionary approach gives you the flexibility of unbounded grids while the 1D and 2D lists have fixed width and height. The 1D list's requirement to calculate the index actually made it slower than the dictionary.
+
+So if you need to have a 2D grid data structure, use the list-of-lists approach, unless you need an unbounded grid. In that case, the dictionary approach is significantly slower but offers this flexibility. Or, if performance isn't important, the dictionary approach has the easiest implementation." - [8]
+
+The Cluedo board is fixed size, so i think a 2D list would be most approprieate. Again, a dictionary is listed as having an easier implementation, but that means I have more to learn from the 2D list method. Also, I don't want it to take ages to print the ASCII grid each time the board updates, so performance is important to an extent. 
+
+
+
 
 
 
