@@ -475,6 +475,36 @@ So if you need to have a 2D grid data structure, use the list-of-lists approach,
 
 The Cluedo board is fixed size, so i think a 2D list would be most approprieate. Again, a dictionary is listed as having an easier implementation, but that means I have more to learn from the 2D list method. Also, I don't want it to take ages to print the ASCII grid each time the board updates, so performance is important to an extent. 
 
+### Considerations for rendering implementation
+
+1. Grid size: The board is 25 rows by 24 columns. Rows go 1-25, and columns go 1-24. However, list indices go 0-24 and 0-23. My adjency map uses 1 based coordinates (like (1,10)), so either I need a translation step or make the list 26 rows by 25 columns and never index 0. I recon second option, where list is 26 by 25, and never index 0. This makes it simpler. 
+
+2. What does each cell contain/possible cell values: width of two characters. 
+    - Room interior: two letter abbreviation per room.
+        - Kitchen: Ki
+        - Ballroom: Ba
+        - Conservatory: Co
+        - Billiard Room: Bi
+        - Library: Li
+        - Study: St
+        - Hall: Ha
+        - Lounge: Lo
+        - Dining Room: Di
+    - Corridor: .. when empty, player initial when occupied
+        - Miss Scarlett: MS
+        - Prof Plum: PP
+        - Mrs Peacock: MP
+        - Rev Green: RG
+        - Mrs White: MW
+        - Col Mustard: CM 
+    - Empty/Wall:  two spaces
+    - Valid Move Highlight: this would be very cool if I can implement
+
+There are two options for printing coloured text to terminal: 
+- Raw ANSI excape codes (no dependencies) [9]. 
+- __colorama__ library (cross platform safe) [10].
+
+I'm going to use the __colorama__ library [10], as the API is cleaner than raw escape codes, and it allows for background colours, which is especially useful for the Cluedo board. The dependencies for this will be written in the requirements.txt file. 
 
 
 
@@ -497,3 +527,7 @@ The Cluedo board is fixed size, so i think a 2D list would be most approprieate.
 [7] @dataclasses.dataclass [Python Documentation](https://docs.python.org/3/library/dataclasses.html) (Accessed 23.03.2026)
 
 [8] How to Represent a 2D Grid in Python Code: [INVENT WITH PYTHON BLOG](https://inventwithpython.com/blog/represent-a-2d-grid-in-python.html) (Accessed 23.03.2026)
+
+[9] Print colored text to terminal with Python: [SENTRY ANSWERS BLOG](sentry.io/answers/print-colored-text-to-terminal-with-python) (Accessed 23.03.2026)
+
+[10] Print Colors in Python terminal: [GeeksForGeeks blog](geeksforgeeks.org/python/print-colors-python-terminal) (Accessed 23.03.2026)

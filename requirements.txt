@@ -1,0 +1,7 @@
+Requirements for running Cluedo game: 
+
+- Python 3.10 or higher
+- colorama (for colored terminal output)
+- pytest (for testing)
+To install the required packages, you can use pip:
+pip install colorama pytest
