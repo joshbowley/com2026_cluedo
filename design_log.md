@@ -646,6 +646,14 @@ show_matching_card() handles three cases:
 - one match returns it automatically
 - multiple matches prompts the responder to choose, keeping the choice hidden from the suggesting player.
 
+## Running the game
+
+Right so the game runs! Testing to check it. 
+
+Ok there was an issue when entering a room. I've fixed that in render. 
+
+Now ok did a full gameplay with a friend. It was annoying that p only showed the clue sheet at one point. So i have adjusted game.py to have this work at every input. 
+
 # Bibliography
 
 [1] python-hangman: [realpython.com/python-hangman/](https://realpython.com/python-hangman/) (Accessed 19.03.2026)

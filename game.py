@@ -57,6 +57,7 @@ class Game():
         self.face_up_cards: list[Card] = []
         self.current_positions: dict[str, tuple | str] = {}
         self._turn_index: int = 0
+        self._current_player: Player | None = None
 
     def setup(self):
         # Initial game setup. 
@@ -226,6 +227,8 @@ class Game():
         Returns:
             An EndCondition if the game should end, otherwise None.
         """
+        self._current_player = player 
+
         print(f"{player.name}'s turn ({player.character})")
         print(f"Position: {player.position}")
         print("(Type 'p' at any move/choice prompt to see game summary.)\n")
@@ -278,7 +281,7 @@ class Game():
         while True:
             raw = input("Choose a destination (enter number): ").strip()
             if raw.lower() == "p":
-                self.print_summary(player)
+                self.print_summary(self._current_player)
                 continue
             try:
                 idx = int(raw)
@@ -455,7 +458,7 @@ class Game():
         Args:
             player: The player whose notes to display.
         """
-        all_cards = _SUSPECTS + _WEAPONS + _ROOMS
+
         col_w = 20
  
         print(f"  {'Card':<{col_w}} Status")
@@ -492,7 +495,7 @@ class Game():
         while True:
             raw = input(prompt).strip().lower()
             if raw == "p":
-                self.print_summary()
+                self.print_summary(self._current_player)
                 continue
             if raw in valid:
                 return raw
@@ -511,7 +514,7 @@ class Game():
         while True:
             raw = input(prompt).strip()
             if raw.lower() == "p":
-                self.print_summary()
+                self.print_summary(self._current_player)
                 continue
             try:
                 idx = int(raw)
