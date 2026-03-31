@@ -635,6 +635,17 @@ Decided to split the summary display across two methods rather than one,  keepin
 
 The notesheet is formatted as a table with fixed column widths using Python's f-string alignment syntax (e.g. f"{name:<18}"), which keeps the output readable regardless of card name length. 
 
+### 31.03.2026
+
+## Implementing record_seen_card() and show_matching_card() in Player
+
+record_seen_card() uses a guard condition to check if the card name is already in self.notes before writing, so that own-hand entries recorded during setup  are never overwritten by a later suggestion response.
+
+show_matching_card() handles three cases: 
+- no matches returns None, 
+- one match returns it automatically
+- multiple matches prompts the responder to choose, keeping the choice hidden from the suggesting player.
+
 # Bibliography
 
 [1] python-hangman: [realpython.com/python-hangman/](https://realpython.com/python-hangman/) (Accessed 19.03.2026)

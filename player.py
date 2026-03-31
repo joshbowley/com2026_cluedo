@@ -32,15 +32,30 @@ class Player:
     def record_seen_card(self, card: str, shown_by: str) -> None:
         """Record a card that has been shown to the player, and who showed it."""
 
-        pass
-
-        
+        if card not in self.notes:
+            self.notes[card] = shown_by        
     
-    def show_matching_card(self, cards: list) -> None:
+    def show_matching_card(self, cards: list) -> str | None:
         """Show a card from the player's hand that matches one of the suggested cards, if any."""
 
-        pass
+        matches = [card for card in self.hand if card.name in cards]
 
+        if not matches: 
+            return None
+        elif len(matches) == 1: 
+            return matches[0].name
+        
+        print(f"\n{self.name}, you have multiple matching cards. Which will you show?")
+        for i, card in enumerate(matches, 1):
+            print(f"  {i}. {card.name}")
+        while True:
+            try:
+                idx = int(input("Enter number: ").strip())
+                if 1 <= idx <= len(matches):
+                    return matches[idx - 1].name
+                print(f"Please enter a number between 1 and {len(matches)}.")
+            except ValueError:
+                print("Invalid input: please enter a number.")
         
     
     def move_to(self, new_position: tuple | str | None) -> None:
