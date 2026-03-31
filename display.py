@@ -85,7 +85,8 @@ def render(current_positions: tuple | str, ) -> None:
 
     # player tokens
     for character, position in current_positions.items():
-        grid[position[0]][position[1]] = _COLOURS[character] + _OBJECT_SYMBOLS[character] + _RESET
+        if isinstance(position, tuple): # only draws in in corridor
+            grid[position[0]][position[1]] = _COLOURS[character] + _OBJECT_SYMBOLS[character] + _RESET
 
     for row in grid:
         for cell in row:
