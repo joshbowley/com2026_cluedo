@@ -200,9 +200,9 @@ class Game():
             result = self.play_turn(player)
  
             if result in (EndCondition.CORRECT_ACCUSATION, EndCondition.ALL_ELIMINATED):
-                print(f"Suspect : {self.solution["Suspect"].name}")
-                print(f"Weapon  : {self.solution["Weapon"].name}")
-                print(f"Room    : {self.solution["Room"].name}")
+                print(f"Suspect : {self.solution['Suspect'].name}")
+                print(f"Weapon  : {self.solution['Weapon'].name}")
+                print(f"Room    : {self.solution['Room'].name}")
                 if result == EndCondition.CORRECT_ACCUSATION:
                     print(f"That is correct! {player.name} wins!")
 
