@@ -270,7 +270,7 @@ class Game():
             return None
  
         # Display board with current positions
-        render(self.current_positions)
+        render(self.current_positions, valid_moves)
  
         # Show valid moves to the player
         print("\nValid moves:")

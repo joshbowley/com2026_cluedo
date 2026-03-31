@@ -21,7 +21,8 @@ _COLOURS = {
     "Mrs White": Back.WHITE + Fore.BLACK,
     "Col Mustard": Back.YELLOW + Fore.WHITE, 
 
-    "Valid Move": Back.GREEN + Fore.BLACK
+    "Valid Move": Back.GREEN + Fore.BLACK, 
+    "Doorway": Back.LIGHTGREEN_EX + Fore.BLACK
 }
 _RESET = Style.RESET_ALL
 
@@ -40,6 +41,7 @@ _OBJECT_SYMBOLS = {
     "Central Room": "Ce",
 
     "Corridor": "..",
+    "Doorway": "..",
     "Empty/Wall": "  ",
 
     "Miss Scarlett": "MS",
@@ -58,7 +60,7 @@ _HEIGHT = 26
 
 
 
-def render(current_positions: tuple | str, ) -> None: 
+def render(current_positions: dict, valid_moves: list = [] ) -> None: 
     """Function to render the board in it's current state."""
     
     grid = [["  " for col in range(_WIDTH)] for row in range(_HEIGHT)]
@@ -83,6 +85,23 @@ def render(current_positions: tuple | str, ) -> None:
         if isinstance(key, tuple):
             grid[key[0]][key[1]] = _COLOURS["Corridor"] + _OBJECT_SYMBOLS["Corridor"] + _RESET
 
+    for room_name, neighbours in _ADJACENCY_MAP.items():
+        if isinstance(room_name, str) and room_name != "Central Room":
+            for neighbour in neighbours:
+                if isinstance(neighbour, tuple):
+                    if _OBJECT_SYMBOLS["Corridor"] + _RESET in grid[neighbour[0]][neighbour[1]]:
+                        grid[neighbour[0]][neighbour[1]] = _COLOURS["Doorway"] + _OBJECT_SYMBOLS["Doorway"] + _RESET
+
+
+    for i, move in enumerate(valid_moves, 1):
+        label = str(i).ljust(2)
+        if isinstance(move, tuple):
+            grid[move[0]][move[1]] = _COLOURS["Valid Move"] + label + _RESET
+        elif isinstance(move, str):
+            for neighbour in _ADJACENCY_MAP.get(move, []):
+                if isinstance(neighbour, tuple):
+                    grid[neighbour[0]][neighbour[1]] = _COLOURS["Valid Move"] + label + _RESET
+    
     # player tokens
     for character, position in current_positions.items():
         if isinstance(position, tuple): # only draws in in corridor
