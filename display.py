@@ -92,4 +92,3 @@ def render(current_positions: tuple | str, ) -> None:
             print(str(cell).ljust(2), end=" ")
         print()
 
-render(_STARTING_POSITIONS)
