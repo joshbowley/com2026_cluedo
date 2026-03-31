@@ -276,22 +276,22 @@ The data each object needs to store
 
 # Turn algorithm 
 
-1. Check if player is elimated from accusing, but still allowed to answer suggestions
-    - If eliminated, then advance turn. 
-    - If not eliminated, continue.  
-2. Check if player has been moved into another room by other player's suggestion since their last turn. 
-    - If has been moved, allow them to choose to either: stay and suggest, or roll and move. 
-        - If stay and suggest, resolve suggestion by checking players in order to the left. Then advance turn. 
-        - If roll and move, continue.
-    - If haven't been moved, continue.
-3. Roll dice. 
-4. Show valid moves. 
-5. Move player. 
-    - If in room, allow suggestion. Resolve suggestion by checking players in order to the left. Then advance turn. 
-    - If in corridor, advance turn. 
-    - If in center of board, optionally accuse.
-        - If accusation correct, end game and player wins. 
-        - If accusation incorrect, mark player as eliminated. Advance turn. 
+    1. Check if player is elimated from accusing, but still allowed to answer suggestions
+        - If eliminated, then advance turn. 
+        - If not eliminated, continue.  
+    2. Check if player has been moved into another room by other player's suggestion since their last turn. 
+        - If has been moved, allow them to choose to either: stay and suggest, or roll and move. 
+            - If stay and suggest, resolve suggestion by checking players in order to the left. Then advance turn. 
+            - If roll and move, continue.
+        - If haven't been moved, continue.
+    3. Roll dice. 
+    4. Show valid moves. 
+    5. Move player. 
+        - If in room, allow suggestion. Resolve suggestion by checking players in order to the left. Then advance turn. 
+        - If in corridor, advance turn. 
+        - If in center of board, optionally accuse.
+            - If accusation correct, end game and player wins. 
+            - If accusation incorrect, mark player as eliminated. Advance turn. 
 
 # Class design
 
@@ -543,6 +543,97 @@ Note: in cluedo, can also end turn  on any corridor square that you pass through
 
 Using a double ended queue [16] so I can popleft(). 
 
+### 30.03.2026/31.03.2026
+
+## Implementing game.py: design decisions. 
+
+First, I need to import all of the classes/files into the game file so that it is able to access the behavior and information from the classes. 
+
+Then, making a list of cards for all suspects, weapons, rooms.
+
+To reduce code, creating _CHARACTERS using existing list of characters from _SUSPECTS. This means that I can remove other lists of characters. 
+
+### __ init__()
+
+Initialising stuff needed for methods: board, players, solution, etc. 
+
+### setup(): 
+
+Here following the commented pseudocode for setup logic: 
+
+- using do-while emulation logic to ask for number of players and waiting until there is a valid input [18]
+- creating a copy of characters 
+- then using do-while logic again to ask for which character each player is
+- then creating instances of the player class for each player with assigned characters
+- dealing cards (I'll make this later)
+    - face up cards
+- record cards (also to be implemented later. im putting in now for logical ordering purposes) **
+- dice roll for who starts
+- create turn order from starting player
+
+According to cluedo rules, the game uses two dice [3], so I'm rolling twice and adding them up. I'm printing both rolls and total as it is easy to do and adds a bit of realism. 
+
+Then printing a turn order
+
+### dealcards(): 
+
+creating copies of cards to be shuffled using random.shuffle() [19]
+
+using copy() as will need to pop them later, and creating a copy means that I can do this without altering the module level constants that are the suspect, weapon and rooms list/s. 
+
+note: copy() creates a shallow copy, so the list is new but the Card objects inside are still the same references [20]. That's fine here since I'm only shuffling and popping, not modifying the cards themselves.
+
+Then shuffling using random.shuffle() 
+
+### run(): 
+
+Used Claude to implement the pseudocode that I have written for run() 
+
+Starting the game loop and cycling through active players until an end condition is reached. 
+
+Again, using the do while loop style of iterating as to advance turns. 
+
+Prompt and output recorded in game.py file. 
+
+I refactored this code as the outputed code for correct accusation and all eliminated, so I reduced repeats by using a simple nested if/else statement. 
+
+### play_turn()
+
+ Used Claude again to implement the pseudocode/logic that I have written for play_turn(). 
+
+ I rewrote dice rolling to conform to existing naming conventions so that my code is self consistent.
+
+Then fixed strings so that they are right, and changed some other things. 
+
+Claude called the following methods in it's generated play_turn(): 
+
+- self._prompt_choice() — used twice, for the suggest-or-move decision and the accusation yes/no
+- self.handle_suggestion() — called in two places, both the early-return path and the normal room entry
+- self.handle_accusation() — called when player chooses to accuse in the Central Room
+- self.print_summary() — called when player types 'p' during move selection
+- self.board.get_valid_moves() — called on the Board instance
+- self.board.is_room() — called to check the destination
+
+_prompt_choice() was also generated by Claude during this implementation, and is also included in the comments at the bottom of the game.py file. 
+
+# handle_suggestion
+
+I then implemented handle_suggestion, creating the _prompt_from_list() and _find_player_by_character() methods. Using underscores to identify that these are internal methods. 
+
+## handle_accusation() 
+
+The accusation method needed to handle three distinct outcomes: 
+- a correct accusation ending the game, 
+- a wrong accusation eliminating the player, 
+- the edge case where the last active player makes a wrong accusation and no winner exists. (Rather than returning a boolean, it returns an EndCondition enum value directly, keeping the decision logic in run() clean and readable)
+
+The player is marked inactive rather than removed from the list so they can still respond to other players' suggestions as per the rules.
+
+## print_summary() and _print_notesheet()
+
+Decided to split the summary display across two methods rather than one,  keeping _print_notesheet() as a private helper that can be called  independently. 
+
+The notesheet is formatted as a table with fixed column widths using Python's f-string alignment syntax (e.g. f"{name:<18}"), which keeps the output readable regardless of card name length. 
 
 # Bibliography
 
@@ -562,9 +653,9 @@ Using a double ended queue [16] so I can popleft().
 
 [8] How to Represent a 2D Grid in Python Code: [INVENT WITH PYTHON BLOG](https://inventwithpython.com/blog/represent-a-2d-grid-in-python.html) (Accessed 23.03.2026)
 
-[9] Print colored text to terminal with Python: [SENTRY ANSWERS BLOG](sentry.io/answers/print-colored-text-to-terminal-with-python) (Accessed 23.03.2026)
+[9] Print colored text to terminal with Python: [SENTRY ANSWERS BLOG](https://sentry.io/answers/print-colored-text-to-terminal-with-python) (Accessed 23.03.2026)
 
-[10] Print Colors in Python terminal: [GeeksForGeeks blog](geeksforgeeks.org/python/print-colors-python-terminal) (Accessed 23.03.2026)
+[10] Print Colors in Python terminal: [GeeksForGeeks blog](https://geeksforgeeks.org/python/print-colors-python-terminal) (Accessed 23.03.2026)
 
 [11] Breadth-First Search in Python: A Guide with Examples: [datacamp blog](https://www.datacamp.com/tutorial/breadth-first-search-in-python) (Accessed 23.03.2026)
 
@@ -577,3 +668,11 @@ Using a double ended queue [16] so I can popleft().
 [15] Breadth First Search in Python (with Code) | BFS Algorithm: [favtutor blog](https://favtutor.com/blogs/breadth-first-search-python) (Accessed 23.03.2026)
 
 [16] collections — Container datatypes: [python collections documentation](https://docs.python.org/3/library/collections.html) (Accessed 23.03.2026)
+
+[17] colorama documentation: [documentation](https://pypi.org/project/colorama/)
+
+[18] emulating a do-while loop in python: [datacamp blog post](https://www.datacamp.com/tutorial/do-while-loop-python) (Accessed 30.03.2026)
+
+[19] random.shuffle() [python documentation](https://docs.python.org/3/library/random.html) (Accessed 30.03.2026)
+
+[20] copy — Shallow and deep copy operations: [python documentation](https://docs.python.org/3/library/copy.html) (Accessed 30.03.2026)

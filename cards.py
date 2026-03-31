@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass
 
-
 @dataclass
 class Card: 
     """A card with a name and a category."""
