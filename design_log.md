@@ -684,6 +684,90 @@ For functions and methods, document arguments, return values, side effects, exce
 - Unless the entire docstring fits on one line, place the closing """ on a line by themselves. python [22]
 - Insert a blank line after all docstrings that document a class, to offset the docstring from the first method. python [22]
 
+## General style cleaning [21]
+
+Reading source [21], these are the style recommendations as I see them. I'm going to apply this to each of my files. 
+
+### Indentation and layout
+
+- Use 4 spaces per indentation level. Never mix tabs and spaces.
+- Limit code lines to 79 characters. Limit docstrings and comments to 72 characters.
+- Surround top-level function and class definitions with two blank lines. Method definitions inside a class use one blank line.
+- Use blank lines sparingly inside functions to indicate logical sections.
+- Break long lines before a binary operator rather than after, so operators align with their operands.
+
+### Imports
+
+- Put each import on a separate line. Place all imports at the top of the file, after module docstrings and before globals.
+- Group imports in order: standard library, third-party, local. Separate each group with a blank line.
+- Prefer absolute imports. Avoid wildcard imports (from module import *).
+
+### Whitespace
+
+- Avoid extraneous whitespace inside parentheses, brackets and braces, and immediately before commas, semicolons or colons.
+- Surround binary operators with a single space on each side.
+- Do not use spaces around = for keyword arguments or unannotated default values. Do use spaces around = when combining an annotation with a default value.
+- Avoid trailing whitespace anywhere.
+- Avoid compound statements — multiple statements on the same line.
+
+### Comments
+
+- Keep comments up to date when code changes. Comments that contradict the code are worse than no comments.
+- Write comments as complete sentences, capitalised, ending with a period.
+- Block comments are indented to the same level as the code they describe. Each line starts with # and a single space.
+- Use inline comments sparingly, separated from the statement by at least two spaces. Do not state the obvious.
+
+### Naming conventions
+
+- Classes: CapWords (PascalCase).
+- Functions, methods, variables: lowercase_with_underscores.
+- Constants: ALL_CAPS_WITH_UNDERSCORES.
+- Module and package names: short, lowercase, no underscores if possible.
+- Use a single leading underscore for internal/non-public attributes (_name).
+- Use double leading underscore to invoke name mangling (__name).
+- Dunder methods use double leading and trailing underscores (__init__).
+- Avoid single-character names l, O, or I — indistinguishable from numerals in some fonts.
+
+### Docstrings
+
+- Write docstrings for all public modules, functions, classes and methods.
+- The closing """ of a multi-line docstring should be on a line by itself. For one-liners, keep the closing """ on the same line.
+- For triple-quoted strings always use double quote characters.
+
+### String quotes
+
+- Pick either single or double quotes and stick to it consistently. Use the other to avoid backslashes when a string contains quote characters.
+
+### Type hints
+
+- Use spaces around the -> arrow in function annotations.
+- Use spaces around = when combining a parameter annotation with a default value.
+
+### Boolean and comparison style
+
+- Use is or is not when comparing to None, never ==.
+- Do not compare boolean values to True or False using == — use the value directly: if player.is_active: not if player.is_active == True:.
+- Use isinstance() for type checks rather than comparing type() directly.
+
+### Sequence and container checks
+
+- Use implicit truthiness for empty sequence checks: if not valid_moves: rather than if len(valid_moves) == 0:.
+
+### Exception handling
+
+- Catch specific exceptions rather than bare except: clauses.
+- Always use except SomeException: rather than catching a broad base class unnecessarily.
+
+### Functions and lambdas
+
+- Always use def statements rather than assigning a lambda to a variable name.
+- Be consistent with return statements — either all return an expression, or none do.
+
+### Protected and private attributes
+
+- Use a single leading underscore for methods and attributes intended for internal use only.
+- Use double leading underscore only when name mangling is specifically required.
+
 # Bibliography
 
 [1] python-hangman: [realpython.com/python-hangman/](https://realpython.com/python-hangman/) (Accessed 19.03.2026)
