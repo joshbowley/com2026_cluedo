@@ -660,28 +660,29 @@ Ok now I've changed display py and game py so that it displays doorways and vali
 
 ## pytest unit tests
 
-Generated three pytest test files covering the core classes: test_board.py,
-test_player.py, and test_game.py. Tests were generated using Claude and pasted
-in with AI citation comment blocks added to each file per the coursework
-specification.
+Generated three pytest test files covering the core classes: test_board.py, test_player.py, and test_game.py. Tests were generated using Claude and pasted in with AI citation comment blocks added to each file per the coursework specification.
 
-test_board.py covers is_room() with @pytest.mark.parametrize across all ten
-room names, get_valid_moves() for return type, step limits, blocked positions,
-room entry, secret passages, and starting squares, plus adjacency map
-reciprocity and integrity checks.
+test_board.py covers is_room() with @pytest.mark.parametrize across all ten room names, get_valid_moves() for return type, step limits, blocked positions, room entry, secret passages, and starting squares, plus adjacency map reciprocity and integrity checks.
 
-test_player.py covers all __ init__ defaults, move_to() for corridors, rooms,
-and None, record_seen_card() including the overwrite guard, and
-show_matching_card() for no match, single match, and multiple matches.
-unittest.mock.patch is used to mock input() in the multiple-matches branch so
-tests don't hang waiting for keyboard input.
+test_player.py covers all __ init__ defaults, move_to() for corridors, rooms, and None, record_seen_card() including the overwrite guard, and show_matching_card() for no match, single match, and multiple matches.
+unittest.mock.patch is used to mock input() in the multiple-matches branch so tests don't hang waiting for keyboard input.
 
-test_game.py covers __ init__ defaults, deal_cards() for solution structure, no
-duplicates, and card accounting across two and three player games,
-_advance_turn() including wraparound, _find_player_by_character(), and
-handle_accusation() for all three return values. handle_accusation tests find
-the correct input index dynamically using .index() so they pass regardless of
-which cards are randomly drawn as the solution.
+test_game.py covers __ init__ defaults, deal_cards() for solution structure, no duplicates, and card accounting across two and three player games, _advance_turn() including wraparound, _find_player_by_character(), and handle_accusation() for all three return values. handle_accusation tests find the correct input index dynamically using .index() so they pass regardless of which cards are randomly drawn as the solution.
+
+## docstrings and comments [21]
+
+Reading PEP 8 – Style Guide for Python Code [21] and PEP 257 – Docstring Conventions [22], creating a guideline for Claude to write my docstrings:
+
+- Docstrings and comments should be wrapped at 72 characters per line. python [21]
+- Write docstrings for all public modules, functions, classes, and methods. Public methods including __init__ should also have docstrings. python [22]
+- Always use """triple double quotes""" around docstrings. python [22]
+- One-line docstrings should fit on a single line, with closing quotes on the same line as the opening quotes, and no blank line before or after. python [22]
+- Write docstrings as a command, not a description — "Return the pathname" not "Returns the pathname". python [22]
+- Multi-line docstrings consist of a summary line, followed by a blank line, followed by a more elaborate description. The summary line should fit on one line. python [22]
+For functions and methods, document arguments, return values, side effects, exceptions raised, and restrictions on when it can be called. python [22]
+- For classes, summarise behaviour and list public methods and instance variables. The class constructor should be documented in __init__'s docstring. python [22]
+- Unless the entire docstring fits on one line, place the closing """ on a line by themselves. python [22]
+- Insert a blank line after all docstrings that document a class, to offset the docstring from the first method. python [22]
 
 # Bibliography
 
@@ -724,3 +725,7 @@ which cards are randomly drawn as the solution.
 [19] random.shuffle() [python documentation](https://docs.python.org/3/library/random.html) (Accessed 30.03.2026)
 
 [20] copy — Shallow and deep copy operations: [python documentation](https://docs.python.org/3/library/copy.html) (Accessed 30.03.2026)
+
+[21] PEP 8 – Style Guide for Python Code: [documentation](https://peps.python.org/pep-0008/) (Accessed 01.04.2026)
+
+[22] PEP 257 – Docstring Conventions: [documentation](https://peps.python.org/pep-0257/) (Accessed 01.04.2026)

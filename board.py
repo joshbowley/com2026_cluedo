@@ -1,4 +1,9 @@
-"""Board Class definition for Cluedo game."""
+"""Board module for Cluedo game.
+
+Defines the Board class and the module-level constants that describe
+the board layout: room names, starting positions, room cell
+coordinates, and the adjacency map used for movement.
+"""
 
 from collections import deque
 
@@ -329,17 +334,25 @@ _ADJACENCY_MAP = {
     }
 
 class Board:
-    """Board with Adjacency Map and Room Names for Cluedo game.
+    """Represent the Cluedo board and provide movement logic.
 
-    Attributes:
-        - room_names: Tuple of room names in the game.
-        - starting_positions: Dictionary mapping each character to their starting position on the board.
-        - room_cells: Dictionary mapping each room name to a list of coordinates representing the cells that 
-        belong to that room.
-        - adjacency_map: Dictionary mapping each position (room name or corridor coordinate) to a 
-        list of adjacent positions.
-        
-    
+    Stores the board layout as class-level constants and exposes
+    methods for calculating valid moves and checking room membership.
+
+    Class attributes:
+       room_names: Tuple of all room name strings.
+        room_cells: Dict mapping room name to list of coordinate
+            tuples representing that room's interior cells.
+        starting_positions: Dict mapping character name to their
+            starting corridor coordinate.
+        adjacency_map: Dict mapping each position (room name string
+            or corridor coordinate tuple) to a list of adjacent
+            positions.
+
+    Public methods:
+        get_valid_moves: Return all reachable positions within a
+            given number of steps using BFS.
+        is_room: Return whether a given position is a room.
     """
 
     # Class attributes
@@ -352,20 +365,23 @@ class Board:
     adjacency_map = _ADJACENCY_MAP
     
     def get_valid_moves(self, position: tuple | str, steps: int, blocked: list[tuple]) -> list[tuple | str]:
-        """Find all valid positions reachable from a given position within a given number of steps.
+        """Return all positions reachable from position within steps.
 
-    Uses Breadth-First Search to explore the adjacency map layer by layer.
-    Rooms are valid destinations but cannot be passed through.
-    Blocked positions (occupied by other players) are excluded.
+        Use Breadth-First Search to explore the adjacency map layer by
+        layer. Rooms are valid destinations but cannot be passed through.
+        Blocked corridor positions are excluded from results.
 
-    Args:
-        position: The starting position, either a corridor coordinate tuple or room name string.
-        steps: The number of steps available to move, determined by the dice roll.
-        blocked: List of corridor coordinates currently occupied by other players.
+        Args:
+            position: Starting position, either a corridor coordinate
+                tuple or a room name string.
+            steps: Number of steps available, determined by dice roll.
+            blocked: List of corridor coordinates currently occupied
+                by other players.
 
-    Returns:
-        List of reachable positions, each either a corridor coordinate tuple or room name string.
-    """
+        Returns:
+            List of reachable positions, each either a corridor
+            coordinate tuple or a room name string.
+        """
         
         visited = set()
         visited.add(position)
@@ -393,5 +409,94 @@ class Board:
         return valid_moves
 
     def is_room(self, position: tuple | str) -> bool:
-        """Check if a given position is a room."""
+        """Return True if position is a room name, False otherwise."""
         return position in self.room_names
+    
+# =============================================================================
+# AI PROMPTS AND OUTPUTS (required per coursework specification)
+# =============================================================================
+# Tool: Claude (claude.ai, claude-sonnet-4-6)
+#
+# Prompt:
+# "Write me docstrings for board.py
+# [uploaded board.py]
+# Return just the docstrings not full code.
+# Write the docstrings in accordance with these instructions:
+# * Write docstrings for all public modules, functions, classes,
+#   and methods. Public methods including __init__ should also
+#   have docstrings.
+# * Always use triple double quotes around docstrings.
+# * One-line docstrings should fit on a single line, with closing
+#   quotes on the same line as the opening quotes, and no blank
+#   line before or after.
+# * Write docstrings as a command, not a description.
+# * Multi-line docstrings consist of a summary line, followed by
+#   a blank line, followed by a more elaborate description.
+# * For functions and methods, document arguments, return values,
+#   side effects, exceptions raised, and restrictions.
+# * For classes, summarise behaviour and list public methods and
+#   instance variables.
+# * Unless the entire docstring fits on one line, place the
+#   closing quotes on a line by themselves.
+# * Insert a blank line after all docstrings that document a class.
+# * Docstrings and comments should be wrapped at 72 characters."
+#
+# Output:
+#
+# Module docstring:
+# """Board module for Cluedo game.
+#
+# Defines the Board class and the module-level constants that
+# describe the board layout: room names, starting positions, room
+# cell coordinates, and the adjacency map used for movement.
+# """
+#
+# Board class docstring:
+# """Represent the Cluedo board and provide movement logic.
+#
+# Stores the board layout as class-level constants and exposes
+# methods for calculating valid moves and checking room membership.
+#
+# Class attributes:
+#     room_names: Tuple of all room name strings.
+#     room_cells: Dict mapping room name to list of coordinate
+#         tuples representing that room's interior cells.
+#     starting_positions: Dict mapping character name to their
+#         starting corridor coordinate.
+#     adjacency_map: Dict mapping each position (room name string
+#         or corridor coordinate tuple) to a list of adjacent
+#         positions.
+#
+# Public methods:
+#     get_valid_moves: Return all reachable positions within a
+#         given number of steps using BFS.
+#     is_room: Return whether a given position is a room.
+# """
+#
+# get_valid_moves docstring:
+# """Return all positions reachable from position within steps.
+#
+# Use Breadth-First Search to explore the adjacency map layer by
+# layer. Rooms are valid destinations but cannot be passed through.
+# Blocked corridor positions are excluded from results.
+#
+# Args:
+#     position: Starting position, either a corridor coordinate
+#         tuple or a room name string.
+#     steps: Number of steps available, determined by dice roll.
+#     blocked: List of corridor coordinates currently occupied
+#         by other players.
+#
+# Returns:
+#     List of reachable positions, each either a corridor
+#     coordinate tuple or a room name string.
+# """
+#
+# is_room docstring:
+# """Return True if position is a room name, False otherwise."""
+#
+# Adaptations made to AI output:
+#   - Docstrings written to PEP 257 conventions as specified
+#   - Verified accuracy of all described attributes and methods
+#     against actual board.py implementation before applying
+# =============================================================================
