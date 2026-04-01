@@ -2,9 +2,10 @@
 
 import random as rand
 
+
 def roll():
     """Roll a six-sided die and return the result."""
-    return rand.randint(1,6)
+    return rand.randint(1, 6)
 
 # =============================================================================
 # AI PROMPTS AND OUTPUTS (required per coursework specification)
