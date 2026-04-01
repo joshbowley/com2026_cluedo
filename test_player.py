@@ -80,6 +80,12 @@ def test_record_seen_card_stores_shown_by(player):
     assert player.notes["Knife"] == "Alice"
 
 def test_record_seen_card_does_not_overwrite_existing(player):
+    """Verify earlier notes are not overwritten by later ones.
+
+    Call record_seen_card twice with the same card name. The
+    first value should be preserved, confirming the guard
+    condition in record_seen_card() works correctly.
+    """
     player.record_seen_card("Knife", "own hand")
     player.record_seen_card("Knife", "Alice")
     assert player.notes["Knife"] == "own hand"
@@ -126,18 +132,27 @@ def test_show_matching_card_returns_string(player_with_hand):
     assert isinstance(result, str)
 
 def test_show_matching_card_multiple_matches_prompts_player(player_with_hand):
-    # two cards match — should prompt for input, mock user choosing first option (1)
+    """Verify player is prompted when multiple cards match.
+
+    Mock input() to return '1' so the test does not hang
+    waiting for keyboard input.
+    """
     with patch("builtins.input", return_value="1"):
         result = player_with_hand.show_matching_card(["Knife", "Kitchen", "Col Mustard"])
     assert result in ["Knife", "Kitchen"]
 
 def test_show_matching_card_multiple_matches_second_choice(player_with_hand):
-    # mock user choosing second option
+    """Verify second choice is returned when player selects 2.
+
+    Mock input() to return '2' so the test does not hang
+    waiting for keyboard input.
+    """
     with patch("builtins.input", return_value="2"):
         result = player_with_hand.show_matching_card(["Knife", "Kitchen", "Col Mustard"])
     assert result in ["Knife", "Kitchen"]
 
 def test_show_matching_card_no_match_returns_none_not_empty_string(player_with_hand):
+    """Verify no match returns None and not an empty string."""
     result = player_with_hand.show_matching_card(["Rope", "Ballroom", "Col Mustard"])
     assert result is None
     assert result != ""
@@ -147,12 +162,12 @@ def test_show_matching_card_no_match_returns_none_not_empty_string(player_with_h
 # =============================================================================
 # Tool: Claude (claude.ai, claude-sonnet-4-6)
 #
-# Prompt:
+# Prompt 1:
 # "Generate pytest unit tests for the methods in this player.py class file.
 #
 # [uploaded player.py]
 #
-# Output: test_player.py containing the following tests:
+# Output 1: test_player.py containing the following tests:
 #
 # @pytest.fixture
 # def player():
@@ -289,4 +304,72 @@ def test_show_matching_card_no_match_returns_none_not_empty_string(player_with_h
 #     show_matching_card() to avoid the test hanging on input()
 #   - Added overwrite guard test for record_seen_card() to verify the
 #     if card not in self.notes guard works correctly
+# =============================================================================
+# 
+#
+# Prompt 2:
+# "Write me docstrings for test_player.py
+# [uploaded test_player.py]
+# Return just the docstrings not full code.
+# Write the docstrings in accordance with these instructions:
+# * Write docstrings for all public modules, functions, classes,
+#   and methods. Public methods including __init__ should also
+#   have docstrings.
+# * Always use triple double quotes around docstrings.
+# * One-line docstrings should fit on a single line, with closing
+#   quotes on the same line as the opening quotes, and no blank
+#   line before or after.
+# * Write docstrings as a command, not a description.
+# * Multi-line docstrings consist of a summary line, followed by
+#   a blank line, followed by a more elaborate description.
+# * For functions and methods, document arguments, return values,
+#   side effects, exceptions raised, and restrictions.
+# * For classes, summarise behaviour and list public methods and
+#   instance variables.
+# * Unless the entire docstring fits on one line, place the
+#   closing quotes on a line by themselves.
+# * Insert a blank line after all docstrings that document a class.
+# * Docstrings and comments should be wrapped at 72 characters."
+#
+# Output 2:
+#
+# Module docstring: already accurate, no change needed.
+#
+# Fixture docstrings: already accurate, no change needed.
+#
+# test_record_seen_card_does_not_overwrite_existing docstring:
+# """Verify earlier notes are not overwritten by later ones.
+#
+# Call record_seen_card twice with the same card name. The
+# first value should be preserved, confirming the guard
+# condition in record_seen_card() works correctly.
+# """
+#
+# test_show_matching_card_multiple_matches_prompts_player docstring:
+# """Verify player is prompted when multiple cards match.
+#
+# Mock input() to return '1' so the test does not hang
+# waiting for keyboard input.
+# """
+#
+# test_show_matching_card_multiple_matches_second_choice docstring:
+# """Verify second choice is returned when player selects 2.
+#
+# Mock input() to return '2' so the test does not hang
+# waiting for keyboard input.
+# """
+#
+# test_show_matching_card_no_match_returns_none_not_empty_string:
+# """Verify no match returns None and not an empty string."""
+#
+# All other test functions: no docstrings added. Test function
+# names are self-describing, which is standard pytest convention.
+# Adding one-liners to every test function would be redundant
+# noise and is not expected practice.
+#
+# Adaptations made to AI output:
+#   - Agreed with AI recommendation not to docstring every test
+#     function, consistent with pytest best practice
+#   - Verified fixture docstrings already accurate, no changes
+#     needed
 # =============================================================================
