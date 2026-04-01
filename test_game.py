@@ -11,13 +11,13 @@ from board import _STARTING_POSITIONS
  
 @pytest.fixture
 def game():
-    """A bare Game instance with no players."""
+    """Return a bare Game instance with no players."""
     return Game()
  
  
 @pytest.fixture
 def game_two_players():
-    """A Game with two players added and cards dealt."""
+    """Return a Game with two players set up and cards dealt."""
     g = Game()
     p1 = Player("Alice", "Miss Scarlett")
     p2 = Player("Bob", "Prof Plum")
@@ -32,7 +32,7 @@ def game_two_players():
  
 @pytest.fixture
 def game_three_players():
-    """A Game with three players added and cards dealt."""
+    """Return a Game with three players set up and cards dealt."""
     g = Game()
     for name, char in [("Alice", "Miss Scarlett"), ("Bob", "Prof Plum"), ("Carol", "Rev Green")]:
         p = Player(name, char)
@@ -79,6 +79,7 @@ def test_deal_cards_solution_room_category(game_two_players):
     assert game_two_players.solution["Room"].category == "Room"
  
 def test_deal_cards_all_cards_accounted_for(game_two_players):
+    """Verify solution + all hands + face-up equals total deck."""
     total = len(_SUSPECTS) + len(_WEAPONS) + len(_ROOMS)
     dealt = sum(len(p.hand) for p in game_two_players.players)
     face_up = len(game_two_players.face_up_cards)
@@ -94,6 +95,7 @@ def test_deal_cards_no_duplicates(game_two_players):
     assert len(all_names) == len(set(all_names))
  
 def test_deal_cards_solution_not_in_any_hand(game_two_players):
+    """Verify no solution card appears in any player's hand."""
     solution_names = {c.name for c in game_two_players.solution.values()}
     for p in game_two_players.players:
         hand_names = {c.name for c in p.hand}
@@ -199,7 +201,13 @@ def test_handle_accusation_wrong_returns_wrong_accusation(game_two_players):
     assert result == EndCondition.WRONG_ACCUSATION
  
 def test_handle_accusation_all_eliminated(game_two_players):
-    """When last active player makes wrong accusation, ALL_ELIMINATED returned."""
+    """Verify ALL_ELIMINATED returned when last active player
+    accuses wrongly.
+
+    Manually set the second player inactive before calling
+    handle_accusation to simulate the last remaining active
+    player making a wrong accusation.
+    """    
     game_two_players.players[1].is_active = False
     player = game_two_players.players[0]
     sol = game_two_players.solution
@@ -222,12 +230,12 @@ def test_handle_accusation_all_eliminated(game_two_players):
 # =============================================================================
 # Tool: Claude (claude.ai, claude-sonnet-4-6)
 #
-# Prompt:
+# Prompt 1:
 # "Generate pytest unit tests for the methods in this game.py class file.
 #
 # [uploaded game.py]
 #
-# Output: test_game.py containing the following tests:
+# Output 1: test_game.py containing the following tests:
 #
 # @pytest.fixture
 # def game():
@@ -418,4 +426,68 @@ def test_handle_accusation_all_eliminated(game_two_players):
 #     handle_accusation since three separate input() calls are made.
 #   - ALL_ELIMINATED test manually sets second player inactive before
 #     calling handle_accusation to simulate last active player accusing.
+# =============================================================================
+# 
+# Prompt 2:
+# "Write me docstrings for test_game.py
+# [uploaded test_game.py]
+# Return just the docstrings not full code.
+# Write the docstrings in accordance with these instructions:
+# * Write docstrings for all public modules, functions, classes,
+#   and methods. Public methods including __init__ should also
+#   have docstrings.
+# * Always use triple double quotes around docstrings.
+# * One-line docstrings should fit on a single line, with closing
+#   quotes on the same line as the opening quotes, and no blank
+#   line before or after.
+# * Write docstrings as a command, not a description.
+# * Multi-line docstrings consist of a summary line, followed by
+#   a blank line, followed by a more elaborate description.
+# * For functions and methods, document arguments, return values,
+#   side effects, exceptions raised, and restrictions.
+# * For classes, summarise behaviour and list public methods and
+#   instance variables.
+# * Unless the entire docstring fits on one line, place the
+#   closing quotes on a line by themselves.
+# * Insert a blank line after all docstrings that document a class.
+# * Docstrings and comments should be wrapped at 72 characters."
+#
+# Output 2:
+#
+# Module docstring: already accurate, no change needed.
+#
+# game fixture docstring:
+# """Return a bare Game instance with no players."""
+#
+# game_two_players fixture docstring:
+# """Return a Game with two players set up and cards dealt."""
+#
+# game_three_players fixture docstring:
+# """Return a Game with three players set up and cards dealt."""
+#
+# test_deal_cards_all_cards_accounted_for docstring:
+# """Verify solution + all hands + face-up equals total deck."""
+#
+# test_deal_cards_solution_not_in_any_hand docstring:
+# """Verify no solution card appears in any player's hand."""
+#
+# test_handle_accusation_all_eliminated docstring:
+# """Verify ALL_ELIMINATED returned when last active player
+# accuses wrongly.
+#
+# Manually set the second player inactive before calling
+# handle_accusation to simulate the last remaining active
+# player making a wrong accusation.
+# """
+#
+# All other test functions: no docstrings added. Test function
+# names are self-describing, which is standard pytest convention.
+# Adding one-liners to every test function would be redundant
+# noise and is not expected practice.
+#
+# Adaptations made to AI output:
+#   - Agreed with AI recommendation not to docstring every test
+#     function, consistent with pytest best practice
+#   - Verified fixture descriptions match actual setup logic
+#     in each fixture before applying
 # =============================================================================
