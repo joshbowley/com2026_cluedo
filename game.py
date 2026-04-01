@@ -1,4 +1,12 @@
-"""Game Class for Cluedo game logic and flow control."""   
+"""Game module for Cluedo game.
+
+Contains the Game class which orchestrates the full game lifecycle:
+setup, card dealing, turn management, suggestion and accusation
+handling, and end condition checking.
+
+Also defines the module-level card data lists _SUSPECTS, _WEAPONS,
+and _ROOMS used throughout the game.
+"""
 
 import random
 from board import Board, _STARTING_POSITIONS
@@ -41,16 +49,37 @@ _ROOMS = [
 _CHARACTERS = [card.name for card in _SUSPECTS]
         
 class Game():
-    """Game with setup, turn management, suggestion and accusation handling, 
-    and end condition checking for Cluedo game.
+    """Orchestrate a full game of Cluedo.
+
+    Manages setup, turn order, movement, suggestions, accusations,
+    and end conditions. Maintains shared game state including player
+    list, solution envelope, current positions, and turn index.
 
     Attributes:
-        - 
-    
-    
+        board: The Board instance used for movement validation.
+        players: Ordered list of Player objects in turn order.
+        solution: Dict with keys 'Suspect', 'Weapon', 'Room'
+            holding the solution Card objects.
+        face_up_cards: List of leftover cards visible to all
+            players after dealing.
+        current_positions: Dict mapping character name to their
+            current board position.
+        _turn_index: Index into players for the current turn.
+        _current_player: The player whose turn is currently
+            active, used by prompt helpers to show the notesheet.
+
+    Public methods:
+        setup: Run the full pre-game setup sequence.
+        deal_cards: Shuffle and deal cards to players.
+        run: Start and manage the main game loop.
+        play_turn: Execute one full turn for a player.
+        handle_suggestion: Resolve a suggestion in a room.
+        handle_accusation: Resolve a formal accusation.
+        print_summary: Print a summary of the current game state.
     """
 
     def __init__(self):
+        """Initialise a Game with empty state ready for setup."""
         self.board = Board()
         self.players: list[Player] = []
         self.solution: dict[str, Card] = {}
@@ -60,6 +89,14 @@ class Game():
         self._current_player: Player | None = None
 
     def setup(self):
+        """Run the full pre-game setup sequence.
+
+        Ask for player count, collect names and character choices,
+        place tokens at starting positions, deal cards, record
+        face-up and own-hand cards into each player's notesheet,
+        and roll dice to determine turn order.
+        """
+
         # Initial game setup. 
         print("Welcome to Cluedo!")
 
@@ -144,9 +181,15 @@ class Game():
                
 
     def deal_cards(self):
-        """Separate cards into categories, seal one of each in the envelope,
-        shuffle the rest, deal evenly to players, and set aside any leftovers.
+        """Shuffle and deal cards to players, sealing one of each
+        category in the solution envelope.
+
+        Shuffle each category independently, pop one card of each
+        type into the solution dict, combine and shuffle the
+        remainder, deal round-robin to players, and set any
+        leftover cards as face-up.
         """
+
         # Shuffle each category independently then pick solution cards
         suspects = _SUSPECTS.copy()
         weapons  = _WEAPONS.copy()
@@ -182,8 +225,11 @@ class Game():
 
 
     def run(self):
-        """Start the game loop, cycling through active players until an
-        EndCondition is reached.
+        """Start the main game loop and run until an end condition.
+
+        Cycle through active players calling play_turn() until
+        CORRECT_ACCUSATION or ALL_ELIMINATED is returned. Print
+        the solution and result on exit.
         """  
 
         print("The game begins!")
@@ -315,7 +361,19 @@ class Game():
         return None
     
     def handle_suggestion(self, player: Player, room: str) -> None:
-        """Resolve a suggestion made by player in room."""
+        """Resolve a suggestion made by player in room.
+
+        Prompt the suggesting player to name a suspect and weapon,
+        move the named suspect token into the room, then check
+        each other player left-to-right for a matching card.
+        Record the shown card in the suggesting player's notesheet.
+
+        Args:
+            player: The player making the suggestion.
+            room: The room the suggestion is made in, always the
+                player's current room.
+        """
+
         print(f"\nSuggestion in {room}")
 
         suspect_names = [c.name for c in _SUSPECTS]
@@ -538,7 +596,7 @@ class Game():
                 return p
         return None
 
-        # =============================================================================
+# =============================================================================
 # AI PROMPTS AND OUTPUTS (required per coursework specification)
 # =============================================================================
 # Tool: Claude (claude.ai, claude-sonnet-4-6)
@@ -738,4 +796,127 @@ class Game():
 #                return raw
 #            print(f"  Please enter one of: {', '.join(valid)}")
 #
+# =============================================================================
+# Prompt 3:
+# "Write me docstrings for game.py
+# [uploaded game.py]
+# Return just the docstrings not full code.
+# Write the docstrings in accordance with these instructions:
+# * Write docstrings for all public modules, functions, classes,
+#   and methods. Public methods including __init__ should also
+#   have docstrings.
+# * Always use triple double quotes around docstrings.
+# * One-line docstrings should fit on a single line, with closing
+#   quotes on the same line as the opening quotes, and no blank
+#   line before or after.
+# * Write docstrings as a command, not a description.
+# * Multi-line docstrings consist of a summary line, followed by
+#   a blank line, followed by a more elaborate description.
+# * For functions and methods, document arguments, return values,
+#   side effects, exceptions raised, and restrictions.
+# * For classes, summarise behaviour and list public methods and
+#   instance variables.
+# * Unless the entire docstring fits on one line, place the
+#   closing quotes on a line by themselves.
+# * Insert a blank line after all docstrings that document a class.
+# * Docstrings and comments should be wrapped at 72 characters."
+#
+# Output 3:
+#
+# Module docstring:
+# """Game module for Cluedo game.
+#
+# Contains the Game class which orchestrates the full game
+# lifecycle: setup, card dealing, turn management, suggestion
+# and accusation handling, and end condition checking.
+#
+# Also defines the module-level card data lists _SUSPECTS,
+# _WEAPONS, and _ROOMS used throughout the game.
+# """
+#
+# Game class docstring:
+# """Orchestrate a full game of Cluedo.
+#
+# Manages setup, turn order, movement, suggestions, accusations,
+# and end conditions. Maintains shared game state including
+# player list, solution envelope, current positions, and turn
+# index.
+#
+# Attributes:
+#     board: The Board instance used for movement validation.
+#     players: Ordered list of Player objects in turn order.
+#     solution: Dict with keys 'Suspect', 'Weapon', 'Room'
+#         holding the solution Card objects.
+#     face_up_cards: List of leftover cards visible to all
+#         players after dealing.
+#     current_positions: Dict mapping character name to their
+#         current board position.
+#     _turn_index: Index into players for the current turn.
+#     _current_player: The player whose turn is currently
+#         active, used by prompt helpers to show the notesheet.
+#
+# Public methods:
+#     setup: Run the full pre-game setup sequence.
+#     deal_cards: Shuffle and deal cards to players.
+#     run: Start and manage the main game loop.
+#     play_turn: Execute one full turn for a player.
+#     handle_suggestion: Resolve a suggestion in a room.
+#     handle_accusation: Resolve a formal accusation.
+#     print_summary: Print a summary of the current game state.
+# """
+#
+# __init__ docstring:
+# """Initialise a Game with empty state ready for setup."""
+#
+# setup docstring:
+# """Run the full pre-game setup sequence.
+#
+# Ask for player count, collect names and character choices,
+# place tokens at starting positions, deal cards, record
+# face-up and own-hand cards into each player's notesheet,
+# and roll dice to determine turn order.
+# """
+#
+# deal_cards docstring:
+# """Shuffle and deal cards to players, sealing one of each
+# category in the solution envelope.
+#
+# Shuffle each category independently, pop one card of each
+# type into the solution dict, combine and shuffle the
+# remainder, deal round-robin to players, and set any
+# leftover cards as face-up.
+# """
+#
+# run docstring:
+# """Start the main game loop and run until an end condition.
+#
+# Cycle through active players calling play_turn() until
+# CORRECT_ACCUSATION or ALL_ELIMINATED is returned. Print
+# the solution and result on exit.
+# """
+#
+# handle_suggestion docstring:
+# """Resolve a suggestion made by player in room.
+#
+# Prompt the suggesting player to name a suspect and weapon,
+# move the named suspect token into the room, then check
+# each other player left-to-right for a matching card.
+# Record the shown card in the suggesting player's notesheet.
+#
+# Args:
+#     player: The player making the suggestion.
+#     room: The room the suggestion is made in, always the
+#         player's current room.
+# """
+#
+# All other method docstrings (play_turn, handle_accusation,
+# print_summary, _print_notesheet, _advance_turn,
+# _prompt_choice, _prompt_from_list, _find_player_by_character)
+# were already accurate and complete — no changes made.
+#
+# Adaptations made to AI output:
+#   - Verified all attribute names and types match actual
+#     __init__ implementation before applying
+#   - Confirmed solution dict keys use capitalised strings
+#     ('Suspect', 'Weapon', 'Room') to match deal_cards()
 # =============================================================================
