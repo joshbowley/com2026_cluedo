@@ -8,7 +8,6 @@ from board import Board, _ADJACENCY_MAP, _ROOM_NAMES, _STARTING_POSITIONS
 def board():
     return Board()
  
- 
 # is_room 
  
 def test_is_room_kitchen(board):
