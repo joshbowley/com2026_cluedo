@@ -2,8 +2,9 @@
 
 from dataclasses import dataclass
 
+
 @dataclass
-class Card: 
+class Card:
     """Represent a single Cluedo card with a name and category.
 
     Used as a data container for suspect, weapon, and room cards.
