@@ -9,12 +9,13 @@ and _ROOMS used throughout the game.
 """
 
 import random
+
 from board import Board, _STARTING_POSITIONS
 from cards import Card
 from dice import roll
 from display import render
 from endcondition import EndCondition
-from player import Player    
+from player import Player
 
 _SUSPECTS = [
     Card("Miss Scarlett", "Suspect"),
@@ -45,10 +46,11 @@ _ROOMS = [
     Card("Lounge",       "Room"),
     Card("Dining Room",  "Room"),
 ]
- 
+
 _CHARACTERS = [card.name for card in _SUSPECTS]
-        
-class Game():
+
+
+class Game:
     """Orchestrate a full game of Cluedo.
 
     Manages setup, turn order, movement, suggestions, accusations,
@@ -129,11 +131,16 @@ class Game():
  
             while True:
                 try:
-                    choice = int(input("  Choose a character (enter number): ").strip())
+                    choice = int(
+                        input("Choose a character (enter number): ").strip()
+                        )
                     if 1 <= choice <= len(self._AVAILABLE_CHARACTERS):
                         character = self._AVAILABLE_CHARACTERS.pop(choice - 1)
                         break
-                    print(f"Please enter a number between 1 and {len(self._AVAILABLE_CHARACTERS)}.")
+                    print(
+                        f"Please enter a number between 1 and" 
+                        f"{len(self._AVAILABLE_CHARACTERS)}."
+                        )
                 except ValueError:
                     print("Invalid input: please enter a number.")
  
@@ -168,7 +175,8 @@ class Game():
             roll_1 = roll()
             roll_2 = roll()
             total = roll_1 + roll_2
-            print(f"  {player.name} rolled {roll_1} and {roll_2}, for a total of {total}.")
+            print(f"  {player.name} rolled {roll_1}"
+                  f"and {roll_2}, for a total of {total}.")
             rolls.append((total, player))
  
         # Sort descending; stable sort keeps original order on ties
@@ -240,13 +248,16 @@ class Game():
             player = self.players[self._turn_index]
  
             if not player.is_active:
-                # Eliminated players still answer suggestions but skip their turn
+                # Eliminated players answer suggestions but skip their turn.
                 self._advance_turn()
                 continue
  
             result = self.play_turn(player)
  
-            if result in (EndCondition.CORRECT_ACCUSATION, EndCondition.ALL_ELIMINATED):
+            if result in (
+                EndCondition.CORRECT_ACCUSATION,
+                EndCondition.ALL_ELIMINATED
+            ):
                 print(f"Suspect : {self.solution['Suspect'].name}")
                 print(f"Weapon  : {self.solution['Weapon'].name}")
                 print(f"Room    : {self.solution['Room'].name}")
@@ -388,8 +399,10 @@ class Game():
             print(f"  {i}. {name}")
         weapon = self._prompt_from_list("Name a weapon: ", weapon_names)
 
-        print(f'\n{player.name} suggests: "{suspect}, with the {weapon}, in the {room}."')
-
+        print(
+            f'\n{player.name} suggests: '
+            f'"{suspect}, with the {weapon}, in the {room}."'
+        )
         # Move the named suspect token into this room
         moved = self._find_player_by_character(suspect)
         if moved and moved is not player:
@@ -452,8 +465,10 @@ class Game():
             print(f"{i}. {name}")
         room = self._prompt_from_list("In which room? ", room_names)
  
-        print(f'\n{player.name} accuses: "{suspect}, with the {weapon}, in the {room}."')
- 
+        print(
+            f'\n{player.name} accuses: '
+            f'"{suspect}, with the {weapon}, in the {room}."'
+        )
         correct = (
             suspect == self.solution["Suspect"].name
             and weapon  == self.solution["Weapon"].name
