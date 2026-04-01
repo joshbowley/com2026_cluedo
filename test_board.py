@@ -42,6 +42,11 @@ def test_get_valid_moves_does_not_include_start(board):
     assert (9, 6) not in board.get_valid_moves((9, 6), 2, [])
  
 def test_get_valid_moves_no_duplicates(board):
+    """Verify no position appears twice in the results.
+
+    Convert each move to a string before making a set to handle
+    tuples and strings uniformly.
+    """
     moves = board.get_valid_moves((9, 6), 4, [])
     assert len(moves) == len(set(str(m) for m in moves))
  
@@ -162,12 +167,12 @@ def test_all_rooms_in_adjacency_map():
 # =============================================================================
 # Tool: Claude (claude.ai, claude-sonnet-4-6)
 #
-# Prompt:
+# Prompt 1:
 # "Generate pytest unit tests for the methods in this board.py class file.
 #
 # [uploaded board.py]
 #
-# Output: test_board.py containing the following tests:
+# Output 1: test_board.py containing the following tests:
 #
 # @pytest.fixture
 # def board():
@@ -296,4 +301,53 @@ def test_all_rooms_in_adjacency_map():
 #   - Used @pytest.mark.parametrize for is_room to cover all room names
 #     without repeating test logic
 #   - Confirmed secret passage pairs from adjacency map before writing tests
+#
+#
+#
+# Prompt 2:
+# "Write me docstrings for test_board.py
+# [uploaded test_board.py]
+# Return just the docstrings not full code.
+# Write the docstrings in accordance with these instructions:
+# * Write docstrings for all public modules, functions, classes,
+#   and methods. Public methods including __init__ should also
+#   have docstrings.
+# * Always use triple double quotes around docstrings.
+# * One-line docstrings should fit on a single line, with closing
+#   quotes on the same line as the opening quotes, and no blank
+#   line before or after.
+# * Write docstrings as a command, not a description.
+# * Multi-line docstrings consist of a summary line, followed by
+#   a blank line, followed by a more elaborate description.
+# * For functions and methods, document arguments, return values,
+#   side effects, exceptions raised, and restrictions.
+# * For classes, summarise behaviour and list public methods and
+#   instance variables.
+# * Unless the entire docstring fits on one line, place the
+#   closing quotes on a line by themselves.
+# * Insert a blank line after all docstrings that document a class.
+# * Docstrings and comments should be wrapped at 72 characters."
+#
+# Output 2:
+#
+# Module docstring: already accurate, no change needed.
+#
+# test_adjacency_map_reciprocal: already has a docstring,
+# no change needed.
+#
+# test_get_valid_moves_no_duplicates docstring:
+# """Verify no position appears twice in the results.
+#
+# Convert each move to a string before making a set to handle
+# tuples and strings uniformly.
+# """
+#
+# All other test functions: no docstrings added. Test function
+# names are self-describing, which is standard pytest convention.
+# Adding one-liners to every test function would be redundant
+# noise and is not expected practice.
+#
+# Adaptations made to AI output:
+#   - Agreed with AI recommendation not to docstring every test
+#     function, consistent with pytest best practice
 # =============================================================================
