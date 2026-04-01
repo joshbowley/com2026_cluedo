@@ -35,20 +35,20 @@ class Player:
             character: The Cluedo suspect token they will play as.
         """
 
-        self.name: str = name 
+        self.name: str = name
 
-        self.character: str = character 
+        self.character: str = character
 
-        self.position: tuple | str | None = None 
+        self.position: tuple | str | None = None
 
-        self.hand: list = [] 
+        self.hand: list = []
 
-        self.notes: dict = {} 
+        self.notes: dict = {}
 
-        self.is_active: bool = True 
+        self.is_active: bool = True
 
-        self.can_suggest_without_moving: bool = False         
-        
+        self.can_suggest_without_moving: bool = False
+
 
     def record_seen_card(self, card: str, shown_by: str) -> None:
         """Record a card that has been seen and who showed it.
@@ -63,8 +63,8 @@ class Player:
         """
 
         if card not in self.notes:
-            self.notes[card] = shown_by        
-    
+            self.notes[card] = shown_by   
+
     def show_matching_card(self, cards: list) -> str | None:
         """Return a card name from hand that matches the suggestion.
 
@@ -87,7 +87,10 @@ class Player:
         elif len(matches) == 1: 
             return matches[0].name
         
-        print(f"\n{self.name}, you have multiple matching cards. Which will you show?")
+        print(
+            f"\n{self.name}, you have multiple matching "
+            f"cards. Which will you show?"
+        )
         for i, card in enumerate(matches, 1):
             print(f"  {i}. {card.name}")
         while True:
