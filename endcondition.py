@@ -2,6 +2,7 @@
 
 from enum import Enum, auto
 
+
 class EndCondition(Enum):
     """Enumerate the possible end conditions of a Cluedo game.
 
@@ -17,9 +18,10 @@ class EndCondition(Enum):
         ALL_ELIMINATED: Every player has made a wrong accusation
             and the game ends with no winner.
     """
+    
     CORRECT_ACCUSATION = auto()
-    WRONG_ACCUSATION = auto() # player eliminated from game
-    ALL_ELIMINATED = auto() # everyone made false accusations
+    WRONG_ACCUSATION = auto() # Player eliminated from game.
+    ALL_ELIMINATED = auto() # Everyone made false accusations.
 
 
 # =============================================================================
