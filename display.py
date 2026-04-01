@@ -24,9 +24,9 @@ _COLOURS = {
     "Mrs Peacock": Back.BLUE + Fore.WHITE,
     "Rev Green": Back.GREEN + Fore.WHITE,
     "Mrs White": Back.WHITE + Fore.BLACK,
-    "Col Mustard": Back.YELLOW + Fore.WHITE, 
+    "Col Mustard": Back.YELLOW + Fore.WHITE,
 
-    "Valid Move": Back.GREEN + Fore.BLACK, 
+    "Valid Move": Back.GREEN + Fore.BLACK,
     "Doorway": Back.LIGHTGREEN_EX + Fore.BLACK
 }
 _RESET = Style.RESET_ALL
@@ -54,18 +54,16 @@ _OBJECT_SYMBOLS = {
     "Mrs Peacock": "MP",
     "Rev Green": "RG",
     "Mrs White": "MW",
-    "Col Mustard": "CM"    
+    "Col Mustard": "CM"
 }
 
 # Added 1 to both height and width as dictionary coordinates start on 1
-# also can print row and column labels as margins
+# Also can print row and column labels as margins
 _WIDTH = 25
 _HEIGHT = 26
 
 
-
-
-def render(current_positions: dict, valid_moves: list = [] ) -> None: 
+def render(current_positions: dict, valid_moves: list = []) -> None:
     """Render the board in its current state to the terminal.
 
     Build a 2D grid and populate it with coloured room interiors,
@@ -86,50 +84,72 @@ def render(current_positions: dict, valid_moves: list = [] ) -> None:
             the room's doorway corridor cells with the same
             number. Defaults to an empty list.
     """
-    
+
     grid = [["  " for col in range(_WIDTH)] for row in range(_HEIGHT)]
 
 
-    for columnNum in range(_WIDTH): 
-        grid[0][columnNum] = columnNum
+    for column_num in range(_WIDTH):
+        grid[0][column_num] = column_num
 
-    for rowNum in range(_HEIGHT):
-        grid[rowNum][0] = rowNum
-
-    # loop through room interiors
+    for row_num in range(_HEIGHT):
+        grid[row_num][0] = row_num
 
     for room_name, cells in _ROOM_CELLS.items():
-        colour = _COLOURS["Central Room"] if room_name == "Central Room" else _COLOURS["Room"]
+        colour = (
+            _COLOURS["Central Room"] 
+            if room_name == "Central Room" 
+            else _COLOURS["Room"]
+        )
         for cell in cells:
-            grid[cell[0]][cell[1]] = colour + _OBJECT_SYMBOLS[room_name] + _RESET
+            grid[cell[0]][cell[1]] = (
+                colour 
+                + _OBJECT_SYMBOLS[room_name] 
+                + _RESET
+            )
 
-    # loop through corridor squares
-    # corridor squares
     for key in _ADJACENCY_MAP.keys():
         if isinstance(key, tuple):
-            grid[key[0]][key[1]] = _COLOURS["Corridor"] + _OBJECT_SYMBOLS["Corridor"] + _RESET
+            grid[key[0]][key[1]] = (
+                _COLOURS["Corridor"] 
+                + _OBJECT_SYMBOLS["Corridor"] 
+                + _RESET
+            )
 
     for room_name, neighbours in _ADJACENCY_MAP.items():
         if isinstance(room_name, str) and room_name != "Central Room":
             for neighbour in neighbours:
                 if isinstance(neighbour, tuple):
-                    if _OBJECT_SYMBOLS["Corridor"] + _RESET in grid[neighbour[0]][neighbour[1]]:
-                        grid[neighbour[0]][neighbour[1]] = _COLOURS["Doorway"] + _OBJECT_SYMBOLS["Doorway"] + _RESET
-
+                    cell_value = grid[neighbour[0]][neighbour[1]]
+                    if _OBJECT_SYMBOLS["Corridor"] + _RESET in cell_value:
+                        grid[neighbour[0]][neighbour[1]] = (
+                            _COLOURS["Doorway"]
+                            + _OBJECT_SYMBOLS["Doorway"]
+                            + _RESET
+                        )
 
     for i, move in enumerate(valid_moves, 1):
         label = str(i).ljust(2)
         if isinstance(move, tuple):
-            grid[move[0]][move[1]] = _COLOURS["Valid Move"] + label + _RESET
+            grid[move[0]][move[1]] = (
+                _COLOURS["Valid Move"]
+                + label + _RESET
+            )
         elif isinstance(move, str):
             for neighbour in _ADJACENCY_MAP.get(move, []):
                 if isinstance(neighbour, tuple):
-                    grid[neighbour[0]][neighbour[1]] = _COLOURS["Valid Move"] + label + _RESET
-    
-    # player tokens
+                    grid[neighbour[0]][neighbour[1]] = (
+                        _COLOURS["Valid Move"] 
+                        + label 
+                        + _RESET
+                    )
+
     for character, position in current_positions.items():
-        if isinstance(position, tuple): # only draws in in corridor
-            grid[position[0]][position[1]] = _COLOURS[character] + _OBJECT_SYMBOLS[character] + _RESET
+        if isinstance(position, tuple):
+            grid[position[0]][position[1]] = (
+                _COLOURS[character] 
+                + _OBJECT_SYMBOLS[character] 
+                + _RESET
+            )
 
     for row in grid:
         for cell in row:
