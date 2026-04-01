@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>com2026_cluedo &#8212; Cluedo COM2026 jb1753 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="com2026-cluedo">
+<h1>com2026_cluedo<a class="headerlink" href="#com2026-cluedo" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="board.html">board module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="board.html#board.Board"><code class="docutils literal notranslate"><span class="pre">Board</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.adjacency_map"><code class="docutils literal notranslate"><span class="pre">Board.adjacency_map</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.get_valid_moves"><code class="docutils literal notranslate"><span class="pre">Board.get_valid_moves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.is_room"><code class="docutils literal notranslate"><span class="pre">Board.is_room()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.room_cells"><code class="docutils literal notranslate"><span class="pre">Board.room_cells</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.room_names"><code class="docutils literal notranslate"><span class="pre">Board.room_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="board.html#board.Board.starting_positions"><code class="docutils literal notranslate"><span class="pre">Board.starting_positions</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cards.html">cards module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cards.html#cards.Card"><code class="docutils literal notranslate"><span class="pre">Card</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cards.html#cards.Card.category"><code class="docutils literal notranslate"><span class="pre">Card.category</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cards.html#cards.Card.name"><code class="docutils literal notranslate"><span class="pre">Card.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dice.html">dice module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dice.html#dice.roll"><code class="docutils literal notranslate"><span class="pre">roll()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">display module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="display.html#display.render"><code class="docutils literal notranslate"><span class="pre">render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="endcondition.html">endcondition module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="endcondition.html#endcondition.EndCondition"><code class="docutils literal notranslate"><span class="pre">EndCondition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="endcondition.html#endcondition.EndCondition.ALL_ELIMINATED"><code class="docutils literal notranslate"><span class="pre">EndCondition.ALL_ELIMINATED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="endcondition.html#endcondition.EndCondition.CORRECT_ACCUSATION"><code class="docutils literal notranslate"><span class="pre">EndCondition.CORRECT_ACCUSATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="endcondition.html#endcondition.EndCondition.WRONG_ACCUSATION"><code class="docutils literal notranslate"><span class="pre">EndCondition.WRONG_ACCUSATION</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">game module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="game.html#game.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.deal_cards"><code class="docutils literal notranslate"><span class="pre">Game.deal_cards()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.handle_accusation"><code class="docutils literal notranslate"><span class="pre">Game.handle_accusation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.handle_suggestion"><code class="docutils literal notranslate"><span class="pre">Game.handle_suggestion()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.play_turn"><code class="docutils literal notranslate"><span class="pre">Game.play_turn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.print_summary"><code class="docutils literal notranslate"><span class="pre">Game.print_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.run"><code class="docutils literal notranslate"><span class="pre">Game.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.html#game.Game.setup"><code class="docutils literal notranslate"><span class="pre">Game.setup()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="player.html">player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="player.html#player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="player.html#player.Player.move_to"><code class="docutils literal notranslate"><span class="pre">Player.move_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="player.html#player.Player.record_seen_card"><code class="docutils literal notranslate"><span class="pre">Player.record_seen_card()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="player.html#player.Player.show_matching_card"><code class="docutils literal notranslate"><span class="pre">Player.show_matching_card()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_board.html">test_board module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.board"><code class="docutils literal notranslate"><span class="pre">board()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_adjacency_map_reciprocal"><code class="docutils literal notranslate"><span class="pre">test_adjacency_map_reciprocal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_all_rooms_in_adjacency_map"><code class="docutils literal notranslate"><span class="pre">test_all_rooms_in_adjacency_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_all_starting_positions_in_adjacency_map"><code class="docutils literal notranslate"><span class="pre">test_all_starting_positions_in_adjacency_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_blocked_does_not_affect_unblocked"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_blocked_does_not_affect_unblocked()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_can_enter_ballroom"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_can_enter_ballroom()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_can_enter_kitchen"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_can_enter_kitchen()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_does_not_include_start"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_does_not_include_start()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_excludes_blocked"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_excludes_blocked()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_col_mustard_start"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_col_mustard_start()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_miss_scarlett_start"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_miss_scarlett_start()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_room_returns_corridor"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_room_returns_corridor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_room_secret_passage_conservatory"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_room_secret_passage_conservatory()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_room_secret_passage_kitchen"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_room_secret_passage_kitchen()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_room_secret_passage_lounge"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_room_secret_passage_lounge()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_from_room_secret_passage_study"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_from_room_secret_passage_study()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_more_steps_reaches_more_squares"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_more_steps_reaches_more_squares()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_multiple_blocked"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_multiple_blocked()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_no_duplicates"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_no_duplicates()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_non_empty_from_corridor"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_non_empty_from_corridor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_one_step_only_neighbours"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_one_step_only_neighbours()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_returns_list"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_returns_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_get_valid_moves_room_not_added_twice"><code class="docutils literal notranslate"><span class="pre">test_get_valid_moves_room_not_added_twice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_all_rooms"><code class="docutils literal notranslate"><span class="pre">test_is_room_all_rooms()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_central_room"><code class="docutils literal notranslate"><span class="pre">test_is_room_central_room()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_corridor_tuple"><code class="docutils literal notranslate"><span class="pre">test_is_room_corridor_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_empty_string"><code class="docutils literal notranslate"><span class="pre">test_is_room_empty_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_invalid_string"><code class="docutils literal notranslate"><span class="pre">test_is_room_invalid_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_board.html#test_board.test_is_room_kitchen"><code class="docutils literal notranslate"><span class="pre">test_is_room_kitchen()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_game.html">test_game module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.game"><code class="docutils literal notranslate"><span class="pre">game()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.game_three_players"><code class="docutils literal notranslate"><span class="pre">game_three_players()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.game_two_players"><code class="docutils literal notranslate"><span class="pre">game_two_players()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_advance_turn_increments_index"><code class="docutils literal notranslate"><span class="pre">test_advance_turn_increments_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_advance_turn_three_players"><code class="docutils literal notranslate"><span class="pre">test_advance_turn_three_players()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_advance_turn_wraps_around"><code class="docutils literal notranslate"><span class="pre">test_advance_turn_wraps_around()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_all_cards_accounted_for"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_all_cards_accounted_for()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_no_duplicates"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_no_duplicates()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_solution_has_three_keys"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_solution_has_three_keys()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_solution_not_in_any_hand"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_solution_not_in_any_hand()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_solution_room_category"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_solution_room_category()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_solution_suspect_category"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_solution_suspect_category()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_solution_weapon_category"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_solution_weapon_category()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_deal_cards_three_players_all_accounted_for"><code class="docutils literal notranslate"><span class="pre">test_deal_cards_three_players_all_accounted_for()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_find_player_by_character_not_found_returns_none"><code class="docutils literal notranslate"><span class="pre">test_find_player_by_character_not_found_returns_none()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_find_player_by_character_returns_correct_player"><code class="docutils literal notranslate"><span class="pre">test_find_player_by_character_returns_correct_player()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_find_player_by_character_second_player"><code class="docutils literal notranslate"><span class="pre">test_find_player_by_character_second_player()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_handle_accusation_all_eliminated"><code class="docutils literal notranslate"><span class="pre">test_handle_accusation_all_eliminated()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_handle_accusation_correct_returns_correct_accusation"><code class="docutils literal notranslate"><span class="pre">test_handle_accusation_correct_returns_correct_accusation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_handle_accusation_wrong_eliminates_player"><code class="docutils literal notranslate"><span class="pre">test_handle_accusation_wrong_eliminates_player()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_handle_accusation_wrong_returns_wrong_accusation"><code class="docutils literal notranslate"><span class="pre">test_handle_accusation_wrong_returns_wrong_accusation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_current_player_none"><code class="docutils literal notranslate"><span class="pre">test_init_current_player_none()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_current_positions_empty"><code class="docutils literal notranslate"><span class="pre">test_init_current_positions_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_face_up_cards_empty"><code class="docutils literal notranslate"><span class="pre">test_init_face_up_cards_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_players_empty"><code class="docutils literal notranslate"><span class="pre">test_init_players_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_solution_empty"><code class="docutils literal notranslate"><span class="pre">test_init_solution_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_game.html#test_game.test_init_turn_index_zero"><code class="docutils literal notranslate"><span class="pre">test_init_turn_index_zero()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_player.html">test_player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.player"><code class="docutils literal notranslate"><span class="pre">player()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.player_with_hand"><code class="docutils literal notranslate"><span class="pre">player_with_hand()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_can_suggest_without_moving_false"><code class="docutils literal notranslate"><span class="pre">test_init_can_suggest_without_moving_false()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_character"><code class="docutils literal notranslate"><span class="pre">test_init_character()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_hand_empty"><code class="docutils literal notranslate"><span class="pre">test_init_hand_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_is_active_true"><code class="docutils literal notranslate"><span class="pre">test_init_is_active_true()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_name"><code class="docutils literal notranslate"><span class="pre">test_init_name()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_notes_empty"><code class="docutils literal notranslate"><span class="pre">test_init_notes_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_init_position_none"><code class="docutils literal notranslate"><span class="pre">test_init_position_none()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_move_to_corridor_tuple"><code class="docutils literal notranslate"><span class="pre">test_move_to_corridor_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_move_to_none"><code class="docutils literal notranslate"><span class="pre">test_move_to_none()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_move_to_room_string"><code class="docutils literal notranslate"><span class="pre">test_move_to_room_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_move_to_updates_position"><code class="docutils literal notranslate"><span class="pre">test_move_to_updates_position()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_adds_entry"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_adds_entry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_does_not_overwrite_existing"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_does_not_overwrite_existing()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_face_up"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_face_up()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_multiple_cards"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_multiple_cards()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_own_hand"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_own_hand()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_record_seen_card_stores_shown_by"><code class="docutils literal notranslate"><span class="pre">test_record_seen_card_stores_shown_by()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_empty_hand"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_empty_hand()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_multiple_matches_prompts_player"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_multiple_matches_prompts_player()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_multiple_matches_second_choice"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_multiple_matches_second_choice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_no_match"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_no_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_no_match_returns_none_not_empty_string"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_no_match_returns_none_not_empty_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_returns_string"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_returns_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_single_match_room"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_single_match_room()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_single_match_suspect"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_single_match_suspect()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_player.html#test_player.test_show_matching_card_single_match_weapon"><code class="docutils literal notranslate"><span class="pre">test_show_matching_card_single_match_weapon()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cluedo COM2026 jb1753</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Joshua Bowley.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

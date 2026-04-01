@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>test_game module &#8212; Cluedo COM2026 jb1753 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-test_game">
+<span id="test-game-module"></span><h1>test_game module<a class="headerlink" href="#module-test_game" title="Link to this heading">¶</a></h1>
+<p>Unit tests for Game class.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.game">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_game.game" title="Link to this definition">¶</a></dt>
+<dd><p>Return a bare Game instance with no players.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.game_three_players">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">game_three_players</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_game.game_three_players" title="Link to this definition">¶</a></dt>
+<dd><p>Return a Game with three players set up and cards dealt.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.game_two_players">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">game_two_players</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_game.game_two_players" title="Link to this definition">¶</a></dt>
+<dd><p>Return a Game with two players set up and cards dealt.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_advance_turn_increments_index">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_advance_turn_increments_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_advance_turn_increments_index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_advance_turn_three_players">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_advance_turn_three_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_three_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_advance_turn_three_players" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_advance_turn_wraps_around">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_advance_turn_wraps_around</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_advance_turn_wraps_around" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_all_cards_accounted_for">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_all_cards_accounted_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_all_cards_accounted_for" title="Link to this definition">¶</a></dt>
+<dd><p>Verify solution + all hands + face-up equals total deck.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_no_duplicates">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_no_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_no_duplicates" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_solution_has_three_keys">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_solution_has_three_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_solution_has_three_keys" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_solution_not_in_any_hand">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_solution_not_in_any_hand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_solution_not_in_any_hand" title="Link to this definition">¶</a></dt>
+<dd><p>Verify no solution card appears in any player’s hand.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_solution_room_category">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_solution_room_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_solution_room_category" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_solution_suspect_category">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_solution_suspect_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_solution_suspect_category" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_solution_weapon_category">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_solution_weapon_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_solution_weapon_category" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_deal_cards_three_players_all_accounted_for">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_deal_cards_three_players_all_accounted_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_three_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_deal_cards_three_players_all_accounted_for" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_find_player_by_character_not_found_returns_none">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_find_player_by_character_not_found_returns_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_find_player_by_character_not_found_returns_none" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_find_player_by_character_returns_correct_player">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_find_player_by_character_returns_correct_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_find_player_by_character_returns_correct_player" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_find_player_by_character_second_player">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_find_player_by_character_second_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_find_player_by_character_second_player" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_handle_accusation_all_eliminated">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_handle_accusation_all_eliminated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_handle_accusation_all_eliminated" title="Link to this definition">¶</a></dt>
+<dd><p>Verify ALL_ELIMINATED returned when last active player
+accuses wrongly.</p>
+<p>Manually set the second player inactive before calling
+handle_accusation to simulate the last remaining active
+player making a wrong accusation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_handle_accusation_correct_returns_correct_accusation">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_handle_accusation_correct_returns_correct_accusation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_handle_accusation_correct_returns_correct_accusation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_handle_accusation_wrong_eliminates_player">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_handle_accusation_wrong_eliminates_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_handle_accusation_wrong_eliminates_player" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_handle_accusation_wrong_returns_wrong_accusation">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_handle_accusation_wrong_returns_wrong_accusation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_two_players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_handle_accusation_wrong_returns_wrong_accusation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_current_player_none">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_current_player_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_current_player_none" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_current_positions_empty">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_current_positions_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_current_positions_empty" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_face_up_cards_empty">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_face_up_cards_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_face_up_cards_empty" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_players_empty">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_players_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_players_empty" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_solution_empty">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_solution_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_solution_empty" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_game.test_init_turn_index_zero">
+<span class="sig-prename descclassname"><span class="pre">test_game.</span></span><span class="sig-name descname"><span class="pre">test_init_turn_index_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_game.test_init_turn_index_zero" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cluedo COM2026 jb1753</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Joshua Bowley.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/test_game.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
