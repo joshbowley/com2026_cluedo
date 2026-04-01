@@ -2,13 +2,14 @@
 
 from game import Game
 
+
 def main():
     """Initialise and run a game of Cluedo."""
     game = Game()
     game.setup()
     game.run()
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
 
 # =============================================================================
