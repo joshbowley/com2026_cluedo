@@ -1,7 +1,15 @@
-Requirements for running Cluedo game: 
+# Requirements for Cluedo COM2026 command-line game.
+# Install with: pip install -r requirements.txt
 
-- Python 3.10 or higher
-- colorama (for colored terminal output)
-- pytest (for testing)
-To install the required packages, you can use pip:
-pip install colorama pytest
+# Python 3.10 or higher required (for union type hints with |)
+
+# Third-party dependencies
+colorama>=0.4.6
+pytest>=7.0.0
+
+# Note: colorama requires initialisation on Windows.
+# This is handled automatically by the call to init()
+# in display.py.
+
+# Standard library dependencies (no installation required):
+# collections, dataclasses, enum, random, unittest
