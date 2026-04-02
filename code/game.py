@@ -314,11 +314,11 @@ class Game:
         print(f"Rolled {die_1} + {die_2} = {total}")
  
         # Build blocked list: corridor positions of other active players
-        blocked = [
+        blocked = {
             p.position
             for p in self.players
             if p is not player and isinstance(p.position, tuple)
-        ]
+        }
  
         valid_moves = self.board.get_valid_moves(player.position, total, blocked)
  

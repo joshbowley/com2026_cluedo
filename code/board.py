@@ -366,7 +366,7 @@ class Board:
             self, 
             position: tuple | str, 
             steps: int, 
-            blocked: list[tuple]
+            blocked: set[tuple]
     ) -> list[tuple | str]:
         
         """Return all positions reachable from position within steps.
@@ -379,7 +379,7 @@ class Board:
             position: Starting position, either a corridor coordinate
                 tuple or a room name string.
             steps: Number of steps available, determined by dice roll.
-            blocked: List of corridor coordinates currently occupied
+            blocked: Set of corridor coordinates currently occupied
                 by other players.
 
         Returns:
