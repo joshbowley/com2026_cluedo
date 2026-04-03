@@ -403,6 +403,9 @@ class Board:
                 elif isinstance(neighbour, str):
                     valid_moves.append(neighbour)
                     visited.add(neighbour)
+                    for doorway in self.adjacency_map.get(neighbour, []):
+                        if isinstance(doorway, tuple):
+                            visited.add(doorway)
                     continue
                 else: # neighbour is a corridor space
                     valid_moves.append(neighbour) # always valid destination
