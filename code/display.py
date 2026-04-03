@@ -142,6 +142,7 @@ def render(current_positions: dict, valid_moves: list = []) -> None:
                         + label 
                         + _RESET
                     )
+                    break
 
     for character, position in current_positions.items():
         if isinstance(position, tuple):
