@@ -109,9 +109,9 @@ class Game:
                 count = int(input("How many players? (2 to 6): \n").strip())
                 if 2 <= count <= 6:
                     break
-                print("  Please enter a number between 2 and 6. \n")
+                print("Please enter a number between 2 and 6. \n")
             except ValueError:
-                print("  Invalid input: please enter a number. \n")
+                print("Invalid input: please enter a number. \n")
 
         self._AVAILABLE_CHARACTERS = _CHARACTERS.copy()
 
@@ -572,7 +572,7 @@ class Game:
                 continue
             if raw in valid:
                 return raw
-            print(f"  Please enter one of: {', '.join(valid)}")
+            print(f"Please enter one of: {', '.join(valid)}")
  
     def _prompt_from_list(self, prompt: str, options: list[str]) -> str:
         """Prompt the user to pick from a numbered list of *options*.
