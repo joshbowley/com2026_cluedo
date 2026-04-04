@@ -175,8 +175,8 @@ class Game:
             roll_1 = roll()
             roll_2 = roll()
             total = roll_1 + roll_2
-            print(f"  {player.name} rolled {roll_1}"
-                  f"and {roll_2}, for a total of {total}.")
+            print(f"{player.name} rolled {roll_1}"
+                  f" and {roll_2}, for a total of {total}.")
             rolls.append((total, player))
  
         # Sort descending; stable sort keeps original order on ties
